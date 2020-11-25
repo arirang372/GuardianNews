@@ -21,8 +21,7 @@
                 style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:contentInsetStart="0dp"
-                app:layout_collapseMode="parallax">
+                app:contentInsetStart="0dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -55,7 +54,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/dashboardBottomNavigationView"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:background="@color/purple_200"
             app:itemBackground="@color/purple_200"
             app:itemIconTint="@color/white"

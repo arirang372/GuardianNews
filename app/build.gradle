@@ -6,6 +6,10 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
 }
 
+def apikeyFile = rootProject.file("keys.properties")
+def apiKeyProperties = new Properties()
+apiKeyProperties.load(new FileInputStream(apikeyFile))
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -17,6 +21,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField("String", "GUARDIAN_API_KEY", apiKeyProperties['GUARDIAN_API_KEY'])
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
