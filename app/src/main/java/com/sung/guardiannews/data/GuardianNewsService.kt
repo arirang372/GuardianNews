@@ -1,6 +1,8 @@
 package com.sung.guardiannews.data
 
 import android.util.Log
+import com.sung.guardiannews.BuildConfig
+import com.sung.guardiannews.model.Section
 import com.sung.guardiannews.data.remote.GuardianServiceResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,10 +15,10 @@ import retrofit2.http.Query
 interface GuardianNewsService {
 
     @GET("/sections")
-    suspend fun <T : Comparable<T>> getSections(
-        @Query(value = "sections") sectionId: String,
-        @Query(value = "api-key") apiKey: String
-    ) : GuardianServiceResponse<T>
+    suspend fun getSections(
+        @Query(value= "sections") sectionId : String,
+        @Query(value = "api-key") apiKey: String = BuildConfig.GUARDIAN_API_KEY
+    ) : GuardianServiceResponse<Section>
 
     companion object {
         private const val BASE_URL = "https://content.guardianapis.com"
