@@ -20,16 +20,19 @@ class GuardianDashboardViewModel(
         MutableLiveData<GuardianServiceResponseResult<List<Section>>>()
 
     val selectedTab = MutableLiveData<String>()
-    val contentResponseResult : LiveData<GuardianServiceResponseResult<List<Content>>> =
-      selectedTab.switchMap {
-          tab ->
-          liveData(Dispatchers.IO + exceptionHandler) {
-              emit(repository.getNewsContent(tab))
-          }
-      }
 
-    private val exceptionHandler = CoroutineExceptionHandler{ _, throwable ->
-        Log.e("Exception","Exception! - ${throwable.message}")
+    val contentResponseResult: LiveData<GuardianServiceResponseResult<List<Content>>> =
+        selectedTab.switchMap { tab ->
+            dataLoading.set(true)
+            liveData(Dispatchers.IO + exceptionHandler) {
+                emit(repository.getNewsContent(tab))
+                dataLoading.set(false)
+            }
+        }
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        Log.e("Exception", "Exception! - ${throwable.message}")
+        dataLoading.set(false)
     }
 
     init {
@@ -50,10 +53,6 @@ class GuardianDashboardViewModel(
             dataLoading.set(false)
         }
     }
-
-//    private fun getNewsContent : LiveData<>= liveData{
-//
-//    }
 
     fun getSectionResponseResult(): LiveData<GuardianServiceResponseResult<List<Section>>> =
         sectionResponseResult
