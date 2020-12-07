@@ -16,7 +16,6 @@ interface GuardianNewsService {
 
     @GET("/sections")
     suspend fun getSections(
-        @Query(value= "sections") sectionId : String,
         @Query(value = "api-key") apiKey: String = BuildConfig.GUARDIAN_API_KEY
     ) : GuardianServiceResponse<Section>
 

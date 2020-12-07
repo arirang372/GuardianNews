@@ -33,12 +33,13 @@ class GuardianDashboardViewModel(
             sectionResponseResult.postValue(
                 GuardianServiceResponseResult.error(exception.toString(), null)
             )
+        } finally {
+            dataLoading.set(false)
         }
     }
 
     fun getSectionResponseResult(): LiveData<GuardianServiceResponseResult<List<Section>>> =
         sectionResponseResult
-
 }
 
 

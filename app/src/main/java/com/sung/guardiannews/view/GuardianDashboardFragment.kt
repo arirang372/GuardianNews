@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.sung.guardiannews.data.GuardianNewsConstants.MAIN_PAGE_TITLES
 import com.sung.guardiannews.data.GuardianNewsRepository
 import com.sung.guardiannews.data.GuardianNewsService
 import com.sung.guardiannews.data.local.GuardianNewsDatabase
@@ -24,7 +25,6 @@ import com.sung.guardiannews.viewmodel.GuardianDashboardViewModel
  *   @author John Sung
  */
 class GuardianDashboardFragment : Fragment() {
-    // private val pagerTitles = mutableListOf("Top news", "Economy", "Social")
     private var pagerTitles: MutableList<String>? = null
     private val adapter = GuardianPagerAdapter()
     lateinit var binding: FragmentGuardianDashboardBinding
@@ -45,13 +45,11 @@ class GuardianDashboardFragment : Fragment() {
 
     override fun onCreate(bundle: Bundle?) {
         super.onCreate(bundle)
-
         viewModel.getSectionResponseResult().observe(this, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    pagerTitles = it.data?.map { it ->
-                        it.sectionName
-                    }?.toMutableList()
+                    pagerTitles = it.data?.filter { it -> MAIN_PAGE_TITLES.contains(it.sectionName)
+                    }?.map { it -> it.sectionName }?.toMutableList()
                     adapter.setItems(pagerTitles!!)
                 }
                 Status.ERROR -> {
@@ -68,15 +66,13 @@ class GuardianDashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGuardianDashboardBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
         val tabLayout = binding.tabs
         val viewPager = binding.viewPager
-
         viewPager.adapter = adapter
-
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
-
         (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
 
@@ -92,7 +88,6 @@ class GuardianDashboardFragment : Fragment() {
                 //binding.dashboardBottomNavigationView.menu.getItem(position).isChecked = true
             }
         })
-
         binding.dashboardBottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 //TODO:

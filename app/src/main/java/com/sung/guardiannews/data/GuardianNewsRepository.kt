@@ -9,8 +9,7 @@ class GuardianNewsRepository(
     private val database: GuardianNewsDatabase,
     private val guardianNewsService: GuardianNewsService
 ) {
-
     suspend fun getSections(): GuardianServiceResponse<Section> {
-        return guardianNewsService.getSections("", BuildConfig.GUARDIAN_API_KEY)
+        return guardianNewsService.getSections(BuildConfig.GUARDIAN_API_KEY)
     }
 }
