@@ -1,6 +1,7 @@
 package com.sung.guardiannews.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,6 +59,11 @@ class GuardianDashboardFragment : Fragment() {
                 }
             }
         })
+
+        viewModel.contentResponseResult.observe(this, {
+                val contents = it.data
+                Log.d("ContentSize", "${contents?.size}")
+        })
     }
 
     override fun onCreateView(
@@ -85,7 +91,8 @@ class GuardianDashboardFragment : Fragment() {
 //            }
 //
             override fun onPageSelected(position: Int) {
-                //binding.dashboardBottomNavigationView.menu.getItem(position).isChecked = true
+                super.onPageSelected(position)
+                viewModel.selectedTab.value = pagerTitles?.get(position)
             }
         })
         binding.dashboardBottomNavigationView.setOnNavigationItemSelectedListener {

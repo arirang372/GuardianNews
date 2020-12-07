@@ -13,6 +13,7 @@ import com.google.gson.annotations.SerializedName
     indices = [Index(value = ["sectionId"])]
 )
 data class Content(
+    @field:SerializedName("primary_id")
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "primary_id")
     val id: Int,

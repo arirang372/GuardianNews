@@ -1,13 +1,13 @@
 package com.sung.guardiannews.viewmodel
 
+import android.util.Log
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.sung.guardiannews.data.GuardianNewsRepository
 import com.sung.guardiannews.data.remote.GuardianServiceResponseResult
+import com.sung.guardiannews.model.Content
 import com.sung.guardiannews.model.Section
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -18,6 +18,19 @@ class GuardianDashboardViewModel(
 
     private val sectionResponseResult =
         MutableLiveData<GuardianServiceResponseResult<List<Section>>>()
+
+    val selectedTab = MutableLiveData<String>()
+    val contentResponseResult : LiveData<GuardianServiceResponseResult<List<Content>>> =
+      selectedTab.switchMap {
+          tab ->
+          liveData(Dispatchers.IO + exceptionHandler) {
+              emit(repository.getNewsContent(tab))
+          }
+      }
+
+    private val exceptionHandler = CoroutineExceptionHandler{ _, throwable ->
+        Log.e("Exception","Exception! - ${throwable.message}")
+    }
 
     init {
         getSections()
@@ -37,6 +50,10 @@ class GuardianDashboardViewModel(
             dataLoading.set(false)
         }
     }
+
+//    private fun getNewsContent : LiveData<>= liveData{
+//
+//    }
 
     fun getSectionResponseResult(): LiveData<GuardianServiceResponseResult<List<Section>>> =
         sectionResponseResult
