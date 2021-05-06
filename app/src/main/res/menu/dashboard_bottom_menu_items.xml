@@ -11,12 +11,6 @@
     android:id="@+id/action_two"
     android:enabled="true"
     android:icon="@drawable/ic_library"
-    android:title="@string/menu_library"
-    app:showAsAction="ifRoom" />
-  <item
-    android:id="@+id/action_three"
-    android:enabled="true"
-    android:icon="@drawable/ic_radio"
-    android:title="@string/menu_radio"
+    android:title="@string/menu_live"
     app:showAsAction="ifRoom" />
 </menu>

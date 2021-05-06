@@ -36,7 +36,6 @@ class GuardianServiceResponseResult<out T>(
     }
 }
 
-
 enum class Status {
     SUCCESS,
     ERROR

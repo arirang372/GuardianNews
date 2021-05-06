@@ -20,4 +20,8 @@
 
     <style name="Theme.GuardianNews.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
 
+    <style name="TextAppearance.GuardianNews.Toolbar.Text" parent="TextAppearance.MaterialComponents.Headline5" >
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
 </resources>

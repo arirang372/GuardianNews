@@ -4,7 +4,7 @@ import android.util.Log
 import com.sung.guardiannews.BuildConfig
 import com.sung.guardiannews.model.Section
 import com.sung.guardiannews.data.remote.GuardianServiceResponse
-import com.sung.guardiannews.model.Content
+import com.sung.guardiannews.model.Article
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -22,11 +22,13 @@ interface GuardianNewsService {
     ) : GuardianServiceResponse<Section>
 
     @GET("/{sectionId}")
-    suspend fun getNewsContents(@Path("sectionId") sectionId : String,
-                                @Query("page-size") pageSize : Int = 25,
+    suspend fun getArticles(@Path("sectionId") sectionId : String,
                                 @Query("page") page : Int = 1,
+                                @Query("page-size") pageSize : Int = 5,
+                                @Query("type") type : String = "article", //type = "article or liveblog"
+                                @Query("show-fields") showFields : String = "all",
                                 @Query(value = "api-key") apiKey: String = BuildConfig.GUARDIAN_API_KEY
-    ) : GuardianServiceResponse<Content>
+    ) : GuardianServiceResponse<Article>
 
     companion object {
         private const val BASE_URL = "https://content.guardianapis.com"
