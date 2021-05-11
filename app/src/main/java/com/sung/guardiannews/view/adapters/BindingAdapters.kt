@@ -18,12 +18,12 @@ object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("articles")
-    fun setArticles(view: RecyclerView, articles: List<Article>) {
-        if(!articles.isNullOrEmpty()) {
+    fun setArticles(view: RecyclerView, articles: List<Article>?) {
+        if(articles != null) {
             view.adapter = GuardianArticleListAdapter().apply {
                 submitList(articles)
             }
-        }
+       }
     }
 
     @JvmStatic

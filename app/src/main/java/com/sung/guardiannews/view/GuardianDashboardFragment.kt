@@ -19,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
  */
 @AndroidEntryPoint
 class GuardianDashboardFragment : Fragment() {
-    private var sections: List<Section>? = null
+    private var sections: List<Section>? = listOf()
     private val adapter = GuardianSectionListAdapter()
     lateinit var binding: FragmentGuardianDashboardBinding
     private val viewModel: GuardianDashboardViewModel by viewModels()
@@ -31,8 +31,12 @@ class GuardianDashboardFragment : Fragment() {
     ): View? {
         binding = FragmentGuardianDashboardBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
-        searchSections()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        searchSections()
     }
 
     private fun searchSections() {

@@ -26,7 +26,7 @@ data class Article(
     val apiUrl: String = "",
     val isHosted: Boolean,
     val fields: Field,
-    val pillarId: String
+    val pillarId: String = ""
 ) : Comparable<Article> {
     override fun compareTo(other: Article) = 0
 }

@@ -37,7 +37,7 @@ class GuardianArticleListAdapter :
     companion object {
         private val ARTICLE_COMPARATOR = object : DiffUtil.ItemCallback<Article>() {
             override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean =
-                oldItem.sectionId == newItem.sectionId
+                oldItem.apiUrl == newItem.apiUrl
 
             override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean =
                 oldItem == newItem

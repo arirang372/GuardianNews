@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -9,16 +10,40 @@
             type="com.sung.guardiannews.model.Section" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/news_section_articles_recycler_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_medium"
-        android:clipToPadding="false"
-        android:orientation="horizontal"
-        android:paddingTop="@dimen/margin_small"
-        app:articles="@{model.articles}"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.sung.guardiannews.view.widget.CustomTextView
+            android:id="@+id/section_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:gravity="left"
+            android:text="@{model.sectionName}"
+            android:textAllCaps="true"
+            android:textSize="@dimen/font_medium"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textFontPath="fonts/gt_medium.otf"
+            tools:text="News Section Title" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_section_articles_recycler_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/margin_small"
+            android:visibility="@{model.articles != null &amp;&amp; !model.articles.isEmpty()}"
+            app:articles="@{model.articles}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/section_title" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
