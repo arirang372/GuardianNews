@@ -11,7 +11,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_medium"
+        android:paddingRight="@dimen/padding_medium">
 
         <com.sung.guardiannews.view.widget.CustomTextView
             android:id="@+id/headline"
@@ -34,7 +36,7 @@
             android:layout_marginTop="@dimen/margin_large"
             android:scaleType="centerCrop"
             android:src="@{model.fields}"
-            app:layout_constraintDimensionRatio="H,16:8"
+            app:layout_constraintDimensionRatio="H,16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/headline" />
