@@ -1,11 +1,13 @@
 package com.sung.guardiannews.view.adapters
 
+import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.sung.guardiannews.model.Article
+import com.sung.guardiannews.model.Field
 import com.sung.guardiannews.view.GuardianArticleListAdapter
 
 object BindingAdapters {
@@ -23,12 +25,17 @@ object BindingAdapters {
             view.adapter = GuardianArticleListAdapter().apply {
                 submitList(articles)
             }
-       }
+        }
     }
 
     @JvmStatic
-    @BindingAdapter("url")
-    fun setImageResource(imageView: ImageView, url: String) {
-        Picasso.get().load(url).into(imageView)
+    @BindingAdapter("android:src")
+    fun setImageResource(imageView: ImageView, fields : Field) {
+        if(TextUtils.isEmpty(fields.thumbnail)){
+            Picasso.get().cancelRequest(imageView)
+            imageView.setImageDrawable(null)
+            return
+        }
+        Picasso.get().load(fields.thumbnail).into(imageView)
     }
 }

@@ -14,10 +14,10 @@
         android:layout_height="wrap_content">
 
         <com.sung.guardiannews.view.widget.CustomTextView
-            android:id="@+id/news_article_title"
+            android:id="@+id/headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{model.sectionId}"
+            android:text="@{model.fields.headline}"
             android:layout_marginLeft="@dimen/margin_large"
             android:gravity="left"
             android:textAllCaps="false"
@@ -28,17 +28,16 @@
             tools:text="News Section Title"/>
 
         <ImageView
-            android:id="@+id/thumbnail"
+            android:id="@+id/articleImage"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/margin_large"
             android:scaleType="centerCrop"
-            android:visibility="@{model.fields != null}"
-            app:url="@{model.fields.thumbnail}"
+            android:src="@{model.fields}"
             app:layout_constraintDimensionRatio="H,16:8"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/news_article_title" />
+            app:layout_constraintTop_toBottomOf="@+id/headline" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
