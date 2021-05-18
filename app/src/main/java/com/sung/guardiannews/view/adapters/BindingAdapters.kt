@@ -3,6 +3,7 @@ package com.sung.guardiannews.view.adapters
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
+import androidx.core.widget.NestedScrollView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
