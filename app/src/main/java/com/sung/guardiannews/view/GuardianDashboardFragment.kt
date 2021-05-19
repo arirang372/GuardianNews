@@ -1,7 +1,6 @@
 package com.sung.guardiannews.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
  *   @author John Sung
  */
 @AndroidEntryPoint
-class GuardianDashboardFragment : Fragment() {
+class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
     private var sections: List<Section>? = listOf()
     private val sectionListAdapter = GuardianSectionListAdapter()
     lateinit var binding: FragmentGuardianDashboardBinding
@@ -39,29 +38,25 @@ class GuardianDashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         searchSections()
-        //setUpNestedScrollViewScrollChangeListener()
+        setUpNestedScrollViewScrollChangeListener()
     }
 
-    private fun setUpNestedScrollViewScrollChangeListener(){
+    private fun setUpNestedScrollViewScrollChangeListener() {
         var isToolbarShown = false
         binding.newsSectionScrollview.setOnScrollChangeListener(
-            NestedScrollView.OnScrollChangeListener{_,_, scrollY, _,_->
+            NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
                 // User scrolled past image to height of toolbar and the title text is
                 // underneath the toolbar, so the toolbar should be shown.
                 val shouldShowToolbar = scrollY > binding.toolbar.height
-                Log.d("ScrollChangeListener", "shouldShowToolBar = $shouldShowToolbar")
                 // The new state of the toolbar differs from the previous state; update
                 // appbar and toolbar attributes.
                 if (isToolbarShown != shouldShowToolbar) {
                     isToolbarShown = shouldShowToolbar
-                    binding.toolbarTitle.text="Hello"
                     // Use shadow animator to add elevation if toolbar is shown
                     binding.appbar.isActivated = shouldShowToolbar
                     // Show the plant name if toolbar is shown
                     binding.toolbarLayout.isTitleEnabled = shouldShowToolbar
-                    return@OnScrollChangeListener
                 }
-                binding.toolbarTitle.text="The Guardian News"
             }
         )
     }
@@ -71,6 +66,7 @@ class GuardianDashboardFragment : Fragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     sections = it.data
+                    viewModel.dashboardTitle.set("${sections?.size} sections")
                     binding.newsSectionItemsRecyclerView.adapter = sectionListAdapter.apply {
                         submitList(sections)
                     }

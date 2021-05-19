@@ -1,6 +1,7 @@
 package com.sung.guardiannews.viewmodel
 
 import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,7 +21,7 @@ class GuardianDashboardViewModel @Inject constructor(
     private val repository: GuardianNewsRepository
 ) : ViewModel() {
     val dataLoading = ObservableBoolean(false)
-
+    val dashboardTitle = ObservableField<String>()
     private val sectionResponseResult =
         MutableLiveData<GuardianServiceResponseResult<List<Section>>>()
 

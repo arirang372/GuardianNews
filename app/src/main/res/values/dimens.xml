@@ -8,6 +8,7 @@
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_extra_height">20dp</dimen>
     <dimen name="card_spacing">4dp</dimen>
+    <dimen name="dashboard_collapsible_layout_height">100dp</dimen>
     <dimen name="design_fab_size_normal">90dp</dimen>
     <dimen name="design_fab_size_mini">45dp</dimen>
 
@@ -39,7 +40,7 @@
     <dimen name="margin_xxxxlarge">30dp</dimen>
     <dimen name="margin_xxxxxlarge">40dp</dimen>
     <dimen name="margin_xxxxxxlarge">50dp</dimen>
-
+    <dimen name="fab_bottom_padding">72dp</dimen>
     <dimen name="font_xxxxsmall">6sp</dimen>
     <dimen name="font_xxxsmall">8sp</dimen>
     <dimen name="font_xxsmall">10sp</dimen>
