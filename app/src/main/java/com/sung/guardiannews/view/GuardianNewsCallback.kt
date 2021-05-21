@@ -1,5 +1,7 @@
 package com.sung.guardiannews.view
 
-interface GuardianNewsCallback {
+import com.sung.guardiannews.model.Section
 
+interface GuardianNewsCallback {
+    fun onGuardianSectionSelected(section : Section)
 }

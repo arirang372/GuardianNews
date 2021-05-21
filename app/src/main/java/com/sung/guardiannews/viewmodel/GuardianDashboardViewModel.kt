@@ -52,9 +52,11 @@ class GuardianDashboardViewModel @Inject constructor(
                     try {
                         it.articles =
                             withContext(Dispatchers.Default) {
-                                repository.getArticles(
-                                    it.sectionName
-                                ).data
+                                it.sectionName?.let { sectionId ->
+                                    repository.getArticles(
+                                        sectionId
+                                    ).data
+                                }
                             }!!
                     } catch (exception: Exception) {
                         //do nothing...

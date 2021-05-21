@@ -10,7 +10,7 @@
         tools:layout="@layout/fragment_guardian_dashboard">
 
         <action
-            android:id="@+id/action_view_pager_fragment_to_plant_detail_fragment"
+            android:id="@+id/action_guardian_dashboard_fragment_to_guardian_section_news_fragment"
             app:destination="@id/guardianSectionNewsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
@@ -23,7 +23,10 @@
         android:id="@+id/guardianSectionNewsFragment"
         android:name="com.sung.guardiannews.view.GuardianSectionNewsFragment"
         tools:layout="@layout/fragment_guardian_section_news">
-
+        <argument android:name="section"
+                  app:argType="com.sung.guardiannews.model.Section"
+                  app:nullable="true"
+                  android:defaultValue="@null" />
     </fragment>
 
 </navigation>

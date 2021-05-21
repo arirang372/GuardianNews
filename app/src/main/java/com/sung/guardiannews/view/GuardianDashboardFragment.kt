@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.sung.guardiannews.data.remote.Status
 import com.sung.guardiannews.databinding.FragmentGuardianDashboardBinding
 import com.sung.guardiannews.model.Section
@@ -21,8 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
     private var sections: List<Section>? = listOf()
-    private val sectionListAdapter = GuardianSectionListAdapter()
-    lateinit var binding: FragmentGuardianDashboardBinding
+    private val sectionListAdapter = GuardianSectionListAdapter(this)
+    private lateinit var binding: FragmentGuardianDashboardBinding
     private val viewModel: GuardianDashboardViewModel by viewModels()
 
     override fun onCreateView(
@@ -76,5 +77,9 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
                 }
             }
         })
+    }
+
+    override fun onGuardianSectionSelected(section: Section) {
+        findNavController().navigate(GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianSectionNewsFragment(section))
     }
 }

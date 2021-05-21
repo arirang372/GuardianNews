@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sung.guardiannews.databinding.NewsSectionArticlesBinding
 import com.sung.guardiannews.model.Section
 
-class GuardianSectionListAdapter :
+class GuardianSectionListAdapter(private val callback: GuardianNewsCallback) :
     ListAdapter<Section, GuardianSectionListAdapter.GuardianSectionViewHolder>(SECTION_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GuardianSectionViewHolder {
@@ -17,7 +17,7 @@ class GuardianSectionListAdapter :
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ), callback
         )
     }
 
@@ -25,11 +25,15 @@ class GuardianSectionListAdapter :
         getItem(position)?.let { holder.bind(it) }
     }
 
-    class GuardianSectionViewHolder(private val binding: NewsSectionArticlesBinding) :
+    class GuardianSectionViewHolder(
+        private val binding: NewsSectionArticlesBinding,
+        private val callback: GuardianNewsCallback
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Section) {
             binding.model = item
+            binding.callback = callback
             binding.executePendingBindings()
         }
     }
