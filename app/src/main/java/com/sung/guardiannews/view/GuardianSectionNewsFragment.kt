@@ -57,34 +57,4 @@ class GuardianSectionNewsFragment : Fragment() {
             }
         }
     }
-
-
-//    private fun searchSectionNewsArticles() {
-//        section?.let {
-//            viewModel.getSectionNewsArticleResult(it, "article").observe(this, { result ->
-//                when (result.status) {
-//                    Status.SUCCESS -> {
-//                        adapter.submitList(result.data)
-//                    }
-//                    Status.ERROR -> {
-//                        //TODO::error handing...
-//                    }
-//                }
-//            })
-//        }
-//    }
-//
-//    private fun setUpScrollListener(){
-//        val layoutManager = binding.sectionNewsItemsRecyclerView.layoutManager as LinearLayoutManager
-//        binding.sectionNewsItemsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                val totalItemCount = layoutManager.itemCount
-//                val visibleItemCount = layoutManager.childCount
-//                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-//
-//                viewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
-//            }
-//        })
-//    }
 }
