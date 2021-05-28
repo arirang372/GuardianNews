@@ -71,6 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
+                android:paddingBottom="@dimen/fab_bottom_padding"
                 android:visibility="@{!viewModel.dataLoading}"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 tools:visibility="visible">>

@@ -1,6 +1,7 @@
 package com.sung.guardiannews.data.remote
 
 import androidx.paging.PagingSource
+import com.sung.guardiannews.data.GuardianNewsRepository.Companion.DEFAULT_PAGE_SIZE
 import com.sung.guardiannews.data.GuardianNewsService
 import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
@@ -20,7 +21,7 @@ class GuardianNewsPagingSource(
                     service.getArticles(
                         it,
                         page,
-                        5,
+                        DEFAULT_PAGE_SIZE,
                         pageType
                     )
                 }!!

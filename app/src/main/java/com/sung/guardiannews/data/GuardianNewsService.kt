@@ -24,7 +24,7 @@ interface GuardianNewsService {
     @GET("/{sectionId}")
     suspend fun getArticles(@Path("sectionId") sectionId : String,
                                 @Query("page") page : Int = 1,
-                                @Query("page-size") pageSize : Int = 5,
+                                @Query("page-size") pageSize : Int = 10,
                                 @Query("type") type : String = "article", //type = "article or liveblog"
                                 @Query("show-fields") showFields : String = "all",
                                 @Query(value = "api-key") apiKey: String = BuildConfig.GUARDIAN_API_KEY

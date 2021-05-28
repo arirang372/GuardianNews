@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.sung.guardiannews.databinding.FragmentGuardianSectionNewsBinding
-import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
 import com.sung.guardiannews.viewmodel.GuardianSectionNewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,11 +23,12 @@ import kotlinx.coroutines.launch
  */
 @AndroidEntryPoint
 class GuardianSectionNewsFragment : Fragment() {
-    private val adapter = GuardianSectionNewsItemsListAdapter()
-    private val viewModel : GuardianSectionNewsViewModel by viewModels()
-    private lateinit var binding : FragmentGuardianSectionNewsBinding
-    private var section : Section? = null
-    private var job : Job? = null
+    private val adapter = GuardianSectionNewsItemsPagingDataAdapter()
+    private val viewModel: GuardianSectionNewsViewModel by viewModels()
+    private lateinit var binding: FragmentGuardianSectionNewsBinding
+    private var section: Section? = null
+    private var job: Job? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,7 +36,7 @@ class GuardianSectionNewsFragment : Fragment() {
     ): View? {
         binding = FragmentGuardianSectionNewsBinding.inflate(inflater, container, false)
         binding.sectionNewsItemsRecyclerView.adapter = adapter
-        val args : GuardianSectionNewsFragmentArgs by navArgs()
+        val args: GuardianSectionNewsFragmentArgs by navArgs()
         section = args.section
         binding.model = args.section
         return binding.root
@@ -47,14 +47,44 @@ class GuardianSectionNewsFragment : Fragment() {
         searchSectionNewsArticles()
     }
 
-    private fun searchSectionNewsArticles(){
+    private fun searchSectionNewsArticles() {
         job?.cancel()
         job = lifecycleScope.launch {
             section?.let { it ->
                 viewModel.getSectionNewsArticle(it, "article").collectLatest {
-                 adapter.submitData(it)
-            } }
+                    adapter.submitData(it)
+                }
+            }
         }
     }
 
+
+//    private fun searchSectionNewsArticles() {
+//        section?.let {
+//            viewModel.getSectionNewsArticleResult(it, "article").observe(this, { result ->
+//                when (result.status) {
+//                    Status.SUCCESS -> {
+//                        adapter.submitList(result.data)
+//                    }
+//                    Status.ERROR -> {
+//                        //TODO::error handing...
+//                    }
+//                }
+//            })
+//        }
+//    }
+//
+//    private fun setUpScrollListener(){
+//        val layoutManager = binding.sectionNewsItemsRecyclerView.layoutManager as LinearLayoutManager
+//        binding.sectionNewsItemsRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//                val totalItemCount = layoutManager.itemCount
+//                val visibleItemCount = layoutManager.childCount
+//                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+//
+//                viewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
+//            }
+//        })
+//    }
 }
