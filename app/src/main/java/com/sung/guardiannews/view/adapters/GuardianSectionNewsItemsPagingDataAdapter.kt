@@ -1,4 +1,4 @@
-package com.sung.guardiannews.view
+package com.sung.guardiannews.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

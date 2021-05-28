@@ -3,13 +3,11 @@ package com.sung.guardiannews.view.adapters
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
-import androidx.core.widget.NestedScrollView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Field
-import com.sung.guardiannews.view.GuardianArticleListAdapter
 
 object BindingAdapters {
 

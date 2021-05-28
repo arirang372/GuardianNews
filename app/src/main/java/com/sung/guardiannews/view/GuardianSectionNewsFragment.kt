@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.sung.guardiannews.databinding.FragmentGuardianSectionNewsBinding
 import com.sung.guardiannews.model.Section
+import com.sung.guardiannews.view.adapters.GuardianSectionNewsItemsPagingDataAdapter
 import com.sung.guardiannews.viewmodel.GuardianSectionNewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job

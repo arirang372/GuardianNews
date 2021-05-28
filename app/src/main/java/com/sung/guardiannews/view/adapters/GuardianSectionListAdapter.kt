@@ -1,4 +1,4 @@
-package com.sung.guardiannews.view
+package com.sung.guardiannews.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.sung.guardiannews.databinding.NewsSectionArticlesBinding
 import com.sung.guardiannews.model.Section
+import com.sung.guardiannews.view.GuardianNewsCallback
 
 class GuardianSectionListAdapter(private val callback: GuardianNewsCallback) :
     ListAdapter<Section, GuardianSectionListAdapter.GuardianSectionViewHolder>(SECTION_COMPARATOR) {
