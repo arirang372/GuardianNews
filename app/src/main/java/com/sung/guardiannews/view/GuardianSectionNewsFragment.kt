@@ -2,11 +2,14 @@ package com.sung.guardiannews.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sung.guardiannews.databinding.FragmentGuardianSectionNewsBinding
 import com.sung.guardiannews.model.Section
@@ -40,12 +43,28 @@ class GuardianSectionNewsFragment : Fragment() {
         val args: GuardianSectionNewsFragmentArgs by navArgs()
         section = args.section
         binding.model = args.section
+        setHasOptionsMenu(true)
+        setUpToolbar()
         return binding.root
+    }
+
+    private fun setUpToolbar(){
+        val appCompatActivity = activity as AppCompatActivity
+        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        appCompatActivity.setSupportActionBar(binding.toolbar)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         searchSectionNewsArticles()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+           android.R.id.home ->
+               binding.root.findNavController().navigateUp()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun searchSectionNewsArticles() {
