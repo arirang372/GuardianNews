@@ -20,7 +20,5 @@ data class Field(
     val bodyText: String = ""
 ) : Comparable<Field> {
     override fun compareTo(other: Field) = 0
-    fun lastModifiedFormatted() : String {
-        return lastModified.toDate().formatTo("MMM dd, yyyy hh:mm a")
-    }
+    fun lastModifiedFormatted() = lastModified.toDate().formatTo("MMM dd, yyyy hh:mm a")
 }
