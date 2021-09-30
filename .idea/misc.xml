@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/layout/fragment_guardian_dashboard.xml" value="0.3776041666666667" />
+        <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/layout/fragment_guardian_section_news.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/layout/news_section_articles.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/layout/section_news_item.xml" value="0.25416666666666665" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

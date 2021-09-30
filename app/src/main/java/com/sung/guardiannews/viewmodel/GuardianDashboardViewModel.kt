@@ -72,6 +72,39 @@ class GuardianDashboardViewModel @Inject constructor(
             dataLoading.set(false)
         }
     }
+
+    /**
+     *  Trying to handle it through Flow
+     *
+     */
+//    private fun getSections() = viewModelScope.launch(Dispatchers.IO) {
+//        dataLoading.set(true)
+//        try {
+//            var response = repository.getSections().response
+//            var sections = response.results
+//            runBlocking {
+//                val deferreds: List<Deferred<Unit>> = sections.map {
+//                    async {
+//                        delay(500)
+//                        it.articles = it.sectionName?.let { it1 -> getSectionArticles(it1) }
+//                    }
+//                }
+//                deferreds.awaitAll()
+//                sectionResponseResult.postValue(GuardianServiceResponseResult.success(sections))
+//            }
+//        } catch (exception: Exception) {
+//            sectionResponseResult.postValue(
+//                GuardianServiceResponseResult.error(exception.toString(), null)
+//            )
+//        } finally {
+//            dataLoading.set(false)
+//        }
+//    }
+
+    private suspend fun getSectionArticles(sectionId: String) =
+        repository.getListArticles(sectionId)
+
+
     fun getSectionResponseResult(): LiveData<GuardianServiceResponseResult<List<Section>>> =
         sectionResponseResult
 

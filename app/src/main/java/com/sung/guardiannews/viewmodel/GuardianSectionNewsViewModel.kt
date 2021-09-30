@@ -20,27 +20,6 @@ class GuardianSectionNewsViewModel @Inject constructor(
     private lateinit var section: Section
     private var pageType: String = ""
 
-//    fun getSectionNewsArticleResult(
-//        section: Section,
-//        pageType: String
-//    ): LiveData<GuardianServiceResponseResult<List<Article>>> =
-//        liveData {
-//            this@GuardianSectionNewsViewModel.section = section
-//            this@GuardianSectionNewsViewModel.pageType = pageType
-//            dataLoading.set(true)
-//            val results = repository.getSectionNewsArticle(section, pageType).asLiveData()
-//            emitSource(results)
-//            dataLoading.set(false)
-//        }
-
-//    fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
-//        if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
-//            viewModelScope.launch {
-//                repository.requestMoreSectionNewsArticles(section, pageType)
-//            }
-//        }
-//    }
-
     fun getSectionNewsArticle(
         section: Section,
         pageType: String

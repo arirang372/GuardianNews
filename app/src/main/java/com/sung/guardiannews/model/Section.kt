@@ -15,7 +15,7 @@ data class Section(
     val webTitle: String? = "",
     val webUrl: String? = "",
     val apiUrl: String? = "",
-    var articles: List<Article> = mutableListOf()
+    var articles: List<Article>? = mutableListOf()
 ) : Comparable<Section>, Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),

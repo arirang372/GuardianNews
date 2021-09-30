@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -74,7 +75,7 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
                     }
                 }
                 Status.ERROR -> {
-                    //TODO::error handing...
+                    Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
                 }
             }
         })
