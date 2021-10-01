@@ -23,10 +23,30 @@
         android:id="@+id/guardianSectionNewsFragment"
         android:name="com.sung.guardiannews.view.GuardianSectionNewsFragment"
         tools:layout="@layout/fragment_guardian_section_news">
-        <argument android:name="section"
-                  app:argType="com.sung.guardiannews.model.Section"
-                  app:nullable="true"
-                  android:defaultValue="@null" />
+        <argument
+            android:name="section"
+            android:defaultValue="@null"
+            app:argType="com.sung.guardiannews.model.Section"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_guardian_section_news_fragment_to_guardian_article_fragment"
+            app:destination="@id/guardianArticleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/guardianArticleFragment"
+        android:name="com.sung.guardiannews.view.GuardianArticleFragment"
+        tools:layout="@layout/fragment_guardian_article">
+        <argument
+            android:name="article"
+            android:defaultValue="@null"
+            app:argType="com.sung.guardiannews.model.Article"
+            app:nullable="true"/>
     </fragment>
 
 </navigation>

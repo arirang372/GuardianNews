@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.sung.guardiannews.databinding.SectionNewsItemBinding
 import com.sung.guardiannews.model.Article
+import com.sung.guardiannews.view.GuardianArticleCallback
+import java.util.*
 
-class GuardianSectionNewsItemsPagingDataAdapter :
+class GuardianSectionNewsItemsPagingDataAdapter(val callback : GuardianArticleCallback) :
     PagingDataAdapter<Article, SectionNewsItemsViewHolder>(ARTICLE_COMPARATOR) {
 
     override fun onBindViewHolder(holder: SectionNewsItemsViewHolder, position: Int) {
@@ -21,7 +23,8 @@ class GuardianSectionNewsItemsPagingDataAdapter :
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            callback
         )
     }
 
@@ -37,11 +40,13 @@ class GuardianSectionNewsItemsPagingDataAdapter :
 }
 
 class SectionNewsItemsViewHolder(
-    private val binding: SectionNewsItemBinding
+    private val binding: SectionNewsItemBinding,
+    private val callback : GuardianArticleCallback
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: Article) {
         binding.model = item
+        binding.callback = callback
         binding.executePendingBindings()
     }
 }

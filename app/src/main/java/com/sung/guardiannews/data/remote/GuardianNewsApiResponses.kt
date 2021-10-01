@@ -1,6 +1,7 @@
 package com.sung.guardiannews.data.remote
 
 import com.google.gson.annotations.SerializedName
+import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Edition
 
 class GuardianServiceResponse<out T>(
@@ -16,8 +17,8 @@ class GuardianNewsResponse<out T>(
     @SerializedName("pages") val pages: Int = 0,
     @SerializedName("edition") val edition: Edition,
     @SerializedName("results") val results: List<T>,
+    val mostViewed: List<Article>
 )
-
 
 class GuardianServiceResponseResult<out T>(
     val status: Status,

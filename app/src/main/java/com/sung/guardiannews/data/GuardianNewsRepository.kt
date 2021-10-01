@@ -9,7 +9,6 @@ import com.sung.guardiannews.data.remote.GuardianServiceResponseResult
 import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class GuardianNewsRepository @Inject constructor(private val service: GuardianNewsService) {
@@ -25,7 +24,12 @@ class GuardianNewsRepository @Inject constructor(private val service: GuardianNe
 //    }
 
     suspend fun getArticles(sectionId: String): GuardianServiceResponseResult<List<Article>> {
-        return GuardianServiceResponseResult.success(service.getArticles(sectionId).response.results)
+        val serviceResponse = service.getArticles(sectionId)
+        val articles: List<Article> = serviceResponse.response.results
+        for (article in articles) {
+            article.mostViewed?.addAll(serviceResponse.response.mostViewed)
+        }
+        return GuardianServiceResponseResult.success(articles)
     }
 
     suspend fun getListArticles(sectionId: String): List<Article> {

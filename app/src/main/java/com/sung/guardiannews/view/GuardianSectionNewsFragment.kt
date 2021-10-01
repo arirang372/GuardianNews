@@ -10,8 +10,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sung.guardiannews.databinding.FragmentGuardianSectionNewsBinding
+import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
 import com.sung.guardiannews.view.adapters.GuardianSectionNewsItemsPagingDataAdapter
 import com.sung.guardiannews.viewmodel.GuardianSectionNewsViewModel
@@ -26,8 +28,8 @@ import kotlinx.coroutines.launch
  *   @author John Sung
  */
 @AndroidEntryPoint
-class GuardianSectionNewsFragment : Fragment() {
-    private val adapter = GuardianSectionNewsItemsPagingDataAdapter()
+class GuardianSectionNewsFragment : Fragment(), GuardianArticleCallback {
+    private val adapter = GuardianSectionNewsItemsPagingDataAdapter(this)
     private val viewModel: GuardianSectionNewsViewModel by viewModels()
     private lateinit var binding: FragmentGuardianSectionNewsBinding
     private var section: Section? = null
@@ -48,7 +50,7 @@ class GuardianSectionNewsFragment : Fragment() {
         return binding.root
     }
 
-    private fun setUpToolbar(){
+    private fun setUpToolbar() {
         val appCompatActivity = activity as AppCompatActivity
         appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         appCompatActivity.setSupportActionBar(binding.toolbar)
@@ -60,9 +62,9 @@ class GuardianSectionNewsFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-           android.R.id.home ->
-               binding.root.findNavController().navigateUp()
+        when (item.itemId) {
+            android.R.id.home ->
+                binding.root.findNavController().navigateUp()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -76,5 +78,13 @@ class GuardianSectionNewsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onGuardianArticleSelected(article: Article) {
+        findNavController().navigate(
+            GuardianSectionNewsFragmentDirections.actionGuardianSectionNewsFragmentToGuardianArticleFragment(
+                article
+            )
+        )
     }
 }
