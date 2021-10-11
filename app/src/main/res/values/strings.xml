@@ -2,5 +2,7 @@
     <string name="app_name">The Guardian News</string>
     <string name="menu_home">Home</string>
     <string name="menu_live">Live</string>
+    <string name="mostViewed">Most viewed</string>
     <string name="filter_button">Filter</string>
+    <string name="share">Share</string>
 </resources>

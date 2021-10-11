@@ -41,7 +41,7 @@
             android:layout_marginTop="@dimen/margin_large"
             android:layout_marginRight="@dimen/margin_large"
             android:gravity="left"
-            android:text="@{model.fields.headline}"
+            android:text="@{model.webTitle}"
             android:textAllCaps="false"
             android:textSize="@dimen/font_medium"
             app:layout_constraintStart_toStartOf="parent"

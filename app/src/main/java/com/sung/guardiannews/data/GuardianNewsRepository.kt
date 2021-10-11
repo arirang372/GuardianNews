@@ -27,7 +27,7 @@ class GuardianNewsRepository @Inject constructor(private val service: GuardianNe
         val serviceResponse = service.getArticles(sectionId)
         val articles: List<Article> = serviceResponse.response.results
         for (article in articles) {
-            article.mostViewed?.addAll(serviceResponse.response.mostViewed)
+            article.mostViewed = serviceResponse.response.mostViewed
         }
         return GuardianServiceResponseResult.success(articles)
     }

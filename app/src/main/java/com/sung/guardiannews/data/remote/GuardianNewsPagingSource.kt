@@ -1,6 +1,7 @@
 package com.sung.guardiannews.data.remote
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.sung.guardiannews.data.GuardianNewsRepository.Companion.DEFAULT_PAGE_SIZE
 import com.sung.guardiannews.data.GuardianNewsService
 import com.sung.guardiannews.model.Article
@@ -26,6 +27,10 @@ class GuardianNewsPagingSource(
                     )
                 }!!
             section.articles = response.response.results
+            for (article in section.articles!!) {
+                article.mostViewed = response.response.mostViewed
+            }
+
             LoadResult.Page(
                 data = response.response.results,
                 prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1,

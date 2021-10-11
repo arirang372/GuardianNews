@@ -17,7 +17,7 @@ class GuardianNewsResponse<out T>(
     @SerializedName("pages") val pages: Int = 0,
     @SerializedName("edition") val edition: Edition,
     @SerializedName("results") val results: List<T>,
-    val mostViewed: List<Article>
+    @SerializedName("mostViewed") val mostViewed: List<Article>
 )
 
 class GuardianServiceResponseResult<out T>(

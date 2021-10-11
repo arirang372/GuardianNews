@@ -25,17 +25,7 @@ class GuardianArticleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGuardianArticleBinding.inflate(inflater, container, false)
-        binding.webview.settings.javaScriptEnabled = true
         val args: GuardianArticleFragmentArgs by navArgs()
-        args.article?.let {
-            args.article!!.fields?.bodyText?.let { it1 ->
-                binding.webview.loadData(
-                    it1,
-                    "text/html; charset=utf-8",
-                    "UTF-8"
-                )
-            }
-        }
         binding.model = args.article
         setHasOptionsMenu(true)
         setUpToolbar()
@@ -47,5 +37,4 @@ class GuardianArticleFragment : Fragment() {
         appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
         appCompatActivity.setSupportActionBar(binding.toolbar)
     }
-
 }

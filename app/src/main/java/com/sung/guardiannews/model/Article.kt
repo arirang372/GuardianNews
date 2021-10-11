@@ -30,7 +30,7 @@ data class Article(
     val isHosted: Boolean,
     val fields: Field?,
     val pillarId: String? = "",
-    val mostViewed: MutableList<Article>? = mutableListOf()
+    var mostViewed: List<Article>? = mutableListOf()
 ) : Comparable<Article>, Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -65,9 +65,13 @@ data class Article(
         parcel.writeParcelable(fields, flags)
         parcel.writeString(pillarId)
         if (Build.VERSION.SDK_INT >= 29) {
-            parcel.writeParcelableList(mostViewed, flags)
+            mostViewed?.let {
+                parcel.writeParcelableList(it, flags)
+            }
         } else {
-            parcel.writeList(mostViewed as List<Article>)
+            mostViewed?.let {
+                parcel.writeList(it as List<Article>)
+            }
         }
     }
 
