@@ -28,7 +28,7 @@
 
         <com.sung.guardiannews.view.widget.CustomTextView
             android:id="@+id/headline"
-            android:layout_width="150dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_large"
             android:gravity="left"
