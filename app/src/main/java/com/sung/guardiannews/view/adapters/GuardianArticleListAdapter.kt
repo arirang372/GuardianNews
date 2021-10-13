@@ -27,7 +27,6 @@ class GuardianArticleListAdapter :
 
     class GuardianArticleViewHolder(private val binding: NewsSectionArticleItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         fun bind(item: Article) {
             binding.model = item
             binding.executePendingBindings()

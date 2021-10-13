@@ -35,22 +35,21 @@
                 android:fitsSystemWindows="true"
                 app:collapsedTitleGravity="center"
                 app:collapsedTitleTextAppearance="@style/TextAppearance.GuardianNews.Toolbar.Title.Text"
-                app:contentScrim="?attr/colorSurface"
+                app:contentScrim="?colorPrimary"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:statusBarScrim="?attr/colorSurface"
-                app:title="@{model.fields.headline}"
-                app:titleEnabled="false"
+                app:title="@{model.sectionNameChild}"
                 app:toolbarId="@id/toolbar">
 
                 <ImageView
                     android:id="@+id/detail_image"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/article_detail_app_bar_height"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
                     android:contentDescription="Article Thumbnail"
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
-                    android:src="@{model.fields}"
-                    app:layout_collapseMode="parallax" />
+                    android:src="@{model.fields}" />
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
@@ -61,7 +60,6 @@
                     app:layout_collapseMode="pin"
                     app:menu="@menu/menu_plant_detail"
                     app:navigationIcon="@drawable/ic_back_arrow"
-                    app:title="@{model.fields.headline}"
                     app:titleTextAppearance="@style/TextAppearance.GuardianNews.Toolbar.Title.Text"
                     app:titleTextColor="?attr/colorOnSurface" />
 
