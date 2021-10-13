@@ -12,7 +12,7 @@
     <dimen name="dashboard_collapsible_layout_height">100dp</dimen>
     <dimen name="design_fab_size_normal">90dp</dimen>
     <dimen name="design_fab_size_mini">45dp</dimen>
-
+    <dimen name="most_viewed_article_thumbnail_size">100dp</dimen>
 
     <dimen name="youtube_thumbnail_width">220dp</dimen>
     <dimen name="youtube_thumbnail_height">120dp</dimen>
