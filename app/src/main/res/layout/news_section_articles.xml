@@ -7,6 +7,7 @@
         <variable
             name="callback"
             type="com.sung.guardiannews.view.GuardianNewsCallback" />
+
         <variable
             name="model"
             type="com.sung.guardiannews.model.Section" />
@@ -20,13 +21,14 @@
 
         <com.sung.guardiannews.view.widget.CustomTextView
             android:id="@+id/section_title"
-            android:layout_width="match_parent"
+            android:layout_width="@dimen/news_section_title_width"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
             android:gravity="left"
-            android:text="@{model.sectionName}"
-            android:textAllCaps="true"
+            android:text="@{model.titleCapitalize(model.sectionName)}"
+            android:textAllCaps="false"
+            android:inputType="textCapWords"
             android:textColor="@color/black"
             android:textSize="@dimen/font_large"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,8 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginRight="@dimen/margin_large"
-            android:scaleType="centerCrop"
             android:onClick="@{()-> callback.onGuardianSectionSelected(model)}"
+            android:scaleType="centerCrop"
             android:src="@drawable/ic_forward_arrow"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

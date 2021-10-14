@@ -34,6 +34,17 @@ data class Section(
         parcel.writeString(apiUrl)
     }
 
+    @ExperimentalStdlibApi
+    fun titleCapitalize(input: String): String {
+        val words: List<String> = input.split("-")
+        var newWord = ""
+        for (single in words) {
+            var newInput = single.substring(0, 1).uppercase() + single.substring(1).lowercase()
+            newWord += "$newInput "
+        }
+        return newWord
+    }
+
     override fun describeContents(): Int {
         return 0
     }
