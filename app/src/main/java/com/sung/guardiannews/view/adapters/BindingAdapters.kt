@@ -9,6 +9,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Field
+import com.sung.guardiannews.view.GuardianNewsCallback
 
 object BindingAdapters {
 
@@ -19,10 +20,10 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("articles")
-    fun setArticles(view: RecyclerView, articles: List<Article>?) {
+    @BindingAdapter(value = ["articles", "callback"])
+    fun setArticles(view: RecyclerView, articles: List<Article>?, callback: GuardianNewsCallback) {
         if (articles != null) {
-            view.adapter = GuardianArticleListAdapter().apply {
+            view.adapter = GuardianArticleListAdapter(callback).apply {
                 submitList(articles)
             }
         }

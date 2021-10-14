@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sung.guardiannews.data.remote.Status
 import com.sung.guardiannews.databinding.FragmentGuardianDashboardBinding
+import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
 import com.sung.guardiannews.view.adapters.GuardianSectionListAdapter
 import com.sung.guardiannews.viewmodel.GuardianDashboardViewModel
@@ -83,5 +84,9 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
 
     override fun onGuardianSectionSelected(section: Section) {
         findNavController().navigate(GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianSectionNewsFragment(section))
+    }
+
+    override fun onGuardianArticleSelected(article: Article) {
+        findNavController().navigate(GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianArticleFragment(article))
     }
 }

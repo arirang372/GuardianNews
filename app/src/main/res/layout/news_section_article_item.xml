@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="callback"
+            type="com.sung.guardiannews.view.GuardianNewsCallback" />
+
+        <variable
             name="model"
             type="com.sung.guardiannews.model.Article" />
     </data>
@@ -13,7 +17,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="320dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{()-> callback.onGuardianArticleSelected(model) }">
 
         <com.sung.guardiannews.view.widget.CustomTextView
             android:id="@+id/headline"

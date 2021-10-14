@@ -55,6 +55,7 @@
             android:orientation="horizontal"
             android:paddingTop="@dimen/margin_small"
             app:articles="@{model.articles}"
+            app:callback="@{callback}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
