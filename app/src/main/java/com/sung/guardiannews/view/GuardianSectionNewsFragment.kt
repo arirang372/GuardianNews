@@ -44,6 +44,10 @@ class GuardianSectionNewsFragment : Fragment(), GuardianArticleCallback {
         binding.sectionNewsItemsRecyclerView.adapter = adapter
         val args: GuardianSectionNewsFragmentArgs by navArgs()
         section = args.section
+        /*
+           This is an equivalent expression.
+           section = arguments?.let { GuardianSectionNewsFragmentArgs.fromBundle(it).section }
+        */
         binding.model = section
         setHasOptionsMenu(true)
         setUpToolbar()
