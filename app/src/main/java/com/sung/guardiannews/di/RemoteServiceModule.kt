@@ -13,7 +13,7 @@ class RemoteServiceModule {
 
     @Singleton
     @Provides
-    fun providesDoorDashService(): GuardianNewsService {
+    fun providesGuardianNewsService(): GuardianNewsService {
         return GuardianNewsService.create()
     }
 }
