@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.text.TextUtils"/>
         <variable
             name="callback"
             type="com.sung.guardiannews.view.GuardianNewsCallback" />
@@ -40,6 +40,7 @@
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
+            android:visibility="@{!TextUtils.isEmpty(model.fields.thumbnail)}"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:layout_constraintDimensionRatio="H,16:9"

@@ -80,7 +80,7 @@
     <dimen name="search_icon_size">45dp</dimen>
     <dimen name="menu_icon_size">40dp</dimen>
     <dimen name="search_bottom_layout_height">55dp</dimen>
-    <dimen name="news_section_title_width">250dp</dimen>
+    <dimen name="news_section_title_width">220dp</dimen>
     <dimen name="list_item_similar_movies_icon_width">145dp</dimen>
     <dimen name="list_item_similar_movies_icon_height">185dp</dimen>
 
