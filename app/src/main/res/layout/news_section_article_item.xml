@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.text.TextUtils"/>
+
+        <import type="android.text.TextUtils" />
+
         <variable
             name="callback"
             type="com.sung.guardiannews.view.GuardianNewsCallback" />
@@ -16,7 +18,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="320dp"
+        android:layout_width="@dimen/news_section_article_item_width"
         android:layout_height="wrap_content"
         android:onClick="@{()-> callback.onGuardianArticleSelected(model) }">
 
@@ -35,14 +37,14 @@
             tools:text="News Section Title" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/music_item_card_view"
+            android:id="@+id/article_image_card_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
             android:visibility="@{!TextUtils.isEmpty(model.fields.thumbnail)}"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_corner_radius"
             app:layout_constraintDimensionRatio="H,16:9"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -54,11 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@{model.fields}"
-                app:layout_constraintDimensionRatio="H,16:9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/headline" />
+                android:src="@{model.fields}" />
 
         </androidx.cardview.widget.CardView>
 

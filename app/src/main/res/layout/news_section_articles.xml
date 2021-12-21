@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="callback"
             type="com.sung.guardiannews.view.GuardianNewsCallback" />
@@ -25,9 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
+            android:inputType="textCapWords"
             android:text="@{model.titleCapitalize(model.sectionName)}"
             android:textAllCaps="false"
-            android:inputType="textCapWords"
             android:textColor="@color/black"
             android:textSize="@dimen/font_medium_large"
             app:layout_constraintLeft_toRightOf="@+id/news_section_detail_button"
@@ -40,7 +41,7 @@
             android:id="@+id/news_section_detail_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/padding"
             android:layout_marginRight="@dimen/margin_large"
             android:onClick="@{()-> callback.onGuardianSectionSelected(model)}"
             android:scaleType="centerCrop"
@@ -49,9 +50,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/news_section_articles_recycler_view"
+            android:id="@+id/news_section_articles_horizontal_recycler_view"
             android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/news_section_article_horizontal_recycleview_height"
             android:layout_marginTop="@dimen/margin_medium"
             android:clipToPadding="false"
             android:orientation="horizontal"
@@ -62,7 +63,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/section_title"
-            tools:listitem="@layout/news_section_article_item"/>
+            tools:listitem="@layout/news_section_article_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

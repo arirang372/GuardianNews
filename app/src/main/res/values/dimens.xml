@@ -5,15 +5,20 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="article_detail_app_bar_height">278dp</dimen>
     <dimen name="card_bottom_info_height">150dp</dimen>
-    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_extra_height">20dp</dimen>
     <dimen name="card_spacing">4dp</dimen>
     <dimen name="dashboard_collapsible_layout_height">100dp</dimen>
     <dimen name="design_fab_size_normal">90dp</dimen>
     <dimen name="design_fab_size_mini">45dp</dimen>
+    <dimen name="most_viewed_article_card_height">500dp</dimen>
+    <dimen name="most_viewed_article_headline_width">200dp</dimen>
     <dimen name="most_viewed_article_thumbnail_size">100dp</dimen>
-
+    <dimen name="news_section_article_horizontal_recycleview_height">200dp</dimen>
+    <dimen name="news_section_article_item_width">320dp</dimen>
+    <dimen name="section_news_screen_paddingTop">72dp</dimen>
+    <dimen name="toolbar_elevation">5dp</dimen>
     <dimen name="youtube_thumbnail_width">220dp</dimen>
     <dimen name="youtube_thumbnail_height">120dp</dimen>
 
@@ -61,30 +66,4 @@
     <dimen name="font_amount">36.7sp</dimen>
     <dimen name="font_xxxlarge">40sp</dimen>
 
-    <dimen name="sliding_menu_width">80dp</dimen>
-
-
-    <dimen name="activity_detail_image_frame_height">190dp</dimen>
-    <dimen name="activity_detail_image_frame_margin_top">120dp</dimen>
-
-
-    <dimen name="activity_detail_circle_size">5dp</dimen>
-    <dimen name="video_item_share_size">80dp</dimen>
-    <dimen name="video_item_image_size">80dp</dimen>
-    <dimen name="profile_item_image_size">70dp</dimen>
-    <dimen name="video_play_image_size">20dp</dimen>
-
-
-    <dimen name="activity_search_fav_icon_size">125dp</dimen>
-    <dimen name="shine_icon_size">25dp</dimen>
-    <dimen name="search_icon_size">45dp</dimen>
-    <dimen name="menu_icon_size">40dp</dimen>
-    <dimen name="search_bottom_layout_height">55dp</dimen>
-    <dimen name="news_section_title_width">220dp</dimen>
-    <dimen name="list_item_similar_movies_icon_width">145dp</dimen>
-    <dimen name="list_item_similar_movies_icon_height">185dp</dimen>
-
-    <dimen name="fragment_container_height">320dp</dimen>
-
-    <dimen name="toolbar_elevation">5dp</dimen>
 </resources>
