@@ -28,7 +28,7 @@ class GuardianMostViewedArticleListAdapter(private val callback: GuardianArticle
         getItem(position)?.let { holder.bind(it, callback) }
     }
 
-    inner class GuardianArticleViewHolder(private val binding: MostViewedArticleItemBinding) :
+    class GuardianArticleViewHolder(private val binding: MostViewedArticleItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Article, callback: GuardianArticleCallback) {

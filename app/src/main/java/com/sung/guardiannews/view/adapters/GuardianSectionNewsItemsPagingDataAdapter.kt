@@ -10,7 +10,9 @@ import com.sung.guardiannews.view.GuardianArticleCallback
 import com.sung.guardiannews.view.helpers.ArticleComparator
 
 class GuardianSectionNewsItemsPagingDataAdapter(val callback: GuardianArticleCallback) :
-    PagingDataAdapter<Article, SectionNewsItemsViewHolder>(ArticleComparator) {
+    PagingDataAdapter<Article, GuardianSectionNewsItemsPagingDataAdapter.SectionNewsItemsViewHolder>(
+        ArticleComparator
+    ) {
 
     override fun onBindViewHolder(holder: SectionNewsItemsViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
@@ -26,17 +28,18 @@ class GuardianSectionNewsItemsPagingDataAdapter(val callback: GuardianArticleCal
             callback
         )
     }
-}
 
-class SectionNewsItemsViewHolder(
-    private val binding: SectionNewsItemBinding,
-    private val callback: GuardianArticleCallback
-) : RecyclerView.ViewHolder(binding.root) {
+    class SectionNewsItemsViewHolder(
+        private val binding: SectionNewsItemBinding,
+        private val callback: GuardianArticleCallback
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Article) {
-        binding.model = item
-        binding.callback = callback
-        binding.executePendingBindings()
+        fun bind(item: Article) {
+            binding.model = item
+            binding.callback = callback
+            binding.executePendingBindings()
+        }
     }
 }
+
 
