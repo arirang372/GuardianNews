@@ -75,7 +75,6 @@ class GuardianDashboardViewModel @Inject constructor(
 
     fun getSectionResponseResult(): LiveData<GuardianServiceResponseResult<List<Section>>> =
         sectionResponseResult
-
 }
 
 
