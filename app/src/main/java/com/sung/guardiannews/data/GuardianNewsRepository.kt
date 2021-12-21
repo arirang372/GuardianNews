@@ -17,23 +17,13 @@ class GuardianNewsRepository @Inject constructor(private val service: GuardianNe
         return service.getSections()
     }
 
-//    suspend fun getSections(): Flow<List<Section>> {
-//        return flow{
-//            emit( service.getSections().response.results)
-//        }
-//    }
-
     suspend fun getArticles(sectionId: String): GuardianServiceResponseResult<List<Article>> {
         val serviceResponse = service.getArticles(sectionId)
         val articles: List<Article> = serviceResponse.response.results
-        for (article in articles) {
+        articles.forEach { article ->
             article.mostViewed = serviceResponse.response.mostViewed
         }
         return GuardianServiceResponseResult.success(articles)
-    }
-
-    suspend fun getListArticles(sectionId: String): List<Article> {
-        return service.getArticles(sectionId).response.results
     }
 
     fun getSectionNewsArticle(
