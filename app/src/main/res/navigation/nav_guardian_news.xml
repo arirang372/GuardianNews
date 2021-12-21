@@ -54,7 +54,24 @@
             android:name="article"
             android:defaultValue="@null"
             app:argType="com.sung.guardiannews.model.Article"
-            app:nullable="true"/>
-    </fragment>
+            app:nullable="true" />
 
+        <action
+            android:id="@+id/action_guardian_article_fragment_to_guardian_most_viewed_article_fragment"
+            app:destination="@id/guardianMostViewedArticleFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/guardianMostViewedArticleFragment"
+        android:name="com.sung.guardiannews.view.GuardianMostViewedArticleFragment"
+        tools:layout="@layout/fragment_most_viewed_article">
+        <argument
+            android:name="article"
+            android:defaultValue="@null"
+            app:argType="com.sung.guardiannews.model.Article"
+            app:nullable="true" />
+    </fragment>
 </navigation>

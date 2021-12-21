@@ -16,4 +16,15 @@ class GuardianDashboardActivity : AppCompatActivity() {
             R.layout.activity_guardian_dashboard
         )
     }
+
+    /**
+     * In order to prevent the crashes from happening due to large amount of data transfer between fragments through Intent
+     * The following link is the resolution to this issue.
+     *
+     * https://stackoverflow.com/questions/56411933/androidruntime-fatal-exception-main-process-data-parcel-size-1245464-bytes-err
+     */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.clear()
+    }
 }

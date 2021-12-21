@@ -8,12 +8,17 @@
         <variable
             name="model"
             type="com.sung.guardiannews.model.Article" />
+
+        <variable
+            name="callback"
+            type="com.sung.guardiannews.view.GuardianArticleCallback" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()-> callback.onGuardianArticleSelected(model)}"
         android:layout_marginTop="@dimen/margin_normal">
 
         <com.google.android.material.imageview.ShapeableImageView

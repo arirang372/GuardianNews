@@ -9,9 +9,6 @@
             name="model"
             type="com.sung.guardiannews.model.Article" />
 
-        <variable
-            name="callback"
-            type="com.sung.guardiannews.view.GuardianArticleCallback" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -72,7 +69,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/article_detail_scrollview"
+            android:id="@+id/most_viewed_article_detail_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
@@ -116,17 +113,7 @@
                     app:layout_constraintTop_toBottomOf="@id/article_trailtext"
                     tools:text="Body" />
 
-                <include
-                    android:id="@+id/most_viewed_article_card"
-                    layout="@layout/most_viewed_article_card"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/most_viewed_article_card_height"
-                    app:callback="@{callback}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/article_body"
-                    app:model="@{model}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 </layout>

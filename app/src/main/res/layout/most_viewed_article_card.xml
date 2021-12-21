@@ -8,6 +8,10 @@
         <variable
             name="model"
             type="com.sung.guardiannews.model.Article" />
+
+        <variable
+            name="callback"
+            type="com.sung.guardiannews.view.GuardianArticleCallback" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,6 +39,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_xxxlarge"
             android:clipToPadding="false"
+            app:callback="@{callback}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"

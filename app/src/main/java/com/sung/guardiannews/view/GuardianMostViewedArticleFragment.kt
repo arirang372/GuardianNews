@@ -8,30 +8,28 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.sung.guardiannews.databinding.FragmentGuardianArticleBinding
-import com.sung.guardiannews.model.Article
+import com.sung.guardiannews.databinding.FragmentMostViewedArticleBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- *   This is a Fragment that renders the article
+ *   This is a Fragment that renders the most viewed article
  *
  *   @author John Sung
  */
 @AndroidEntryPoint
-class GuardianArticleFragment : Fragment(), GuardianArticleCallback {
-    private lateinit var binding: FragmentGuardianArticleBinding
+class GuardianMostViewedArticleFragment : Fragment() {
+
+    private lateinit var binding: FragmentMostViewedArticleBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentGuardianArticleBinding.inflate(inflater, container, false)
+        binding = FragmentMostViewedArticleBinding.inflate(inflater, container, false)
         val args: GuardianArticleFragmentArgs by navArgs()
         binding.model = args.article
-        binding.callback = this
         setHasOptionsMenu(true)
         setUpToolbar()
         return binding.root
@@ -49,13 +47,5 @@ class GuardianArticleFragment : Fragment(), GuardianArticleCallback {
                 binding.root.findNavController().navigateUp()
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onGuardianArticleSelected(article: Article) {
-        findNavController().navigate(
-            GuardianArticleFragmentDirections.actionGuardianArticleFragmentToGuardianMostViewedArticleFragment(
-                article
-            )
-        )
     }
 }

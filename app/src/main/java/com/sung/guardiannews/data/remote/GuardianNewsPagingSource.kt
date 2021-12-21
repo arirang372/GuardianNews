@@ -30,7 +30,6 @@ class GuardianNewsPagingSource(
             for (article in section.articles!!) {
                 article.mostViewed = response.response.mostViewed
             }
-
             LoadResult.Page(
                 data = response.response.results,
                 prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1,

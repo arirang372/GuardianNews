@@ -9,6 +9,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Field
+import com.sung.guardiannews.view.GuardianArticleCallback
 import com.sung.guardiannews.view.GuardianNewsCallback
 
 object BindingAdapters {
@@ -30,10 +31,12 @@ object BindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("mostViewed")
-    fun setMostViewed(view: RecyclerView, articles: List<Article>?) {
+    @BindingAdapter(value = ["mostViewed", "callback"])
+    fun setMostViewed(
+        view: RecyclerView, articles: List<Article>?, callback: GuardianArticleCallback
+    ) {
         if (articles != null) {
-            view.adapter = GuardianMostViewedArticleListAdapter().apply {
+            view.adapter = GuardianMostViewedArticleListAdapter(callback).apply {
                 submitList(articles)
             }
         }
