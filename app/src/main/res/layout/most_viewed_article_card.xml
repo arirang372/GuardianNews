@@ -43,7 +43,8 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title"
-            app:mostViewed="@{model.mostViewed}" />
+            app:mostViewed="@{model.mostViewed}"
+            tools:listitem="@layout/most_viewed_article_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

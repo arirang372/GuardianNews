@@ -103,6 +103,21 @@
                     app:layout_constraintTop_toBottomOf="@id/article_title"
                     tools:text="StandFirst" />
 
+                <com.sung.guardiannews.view.widget.CustomTextView
+                    android:id="@+id/updatedDateTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:gravity="left"
+                    android:text="@{`Updated : ` + model.fields.lastModifiedFormatted}"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/font_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/article_trailtext"
+                    app:textFontPath="fonts/circular_book.otf"
+                    tools:text="7:30 PM May 20, 2021" />
+
                 <WebView
                     android:id="@+id/article_body"
                     android:layout_width="match_parent"
@@ -110,7 +125,7 @@
                     android:layout_marginTop="@dimen/margin_medium"
                     android:text="@{model.fields}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/article_trailtext"
+                    app:layout_constraintTop_toBottomOf="@id/updatedDateTime"
                     tools:text="Body" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

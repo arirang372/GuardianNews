@@ -45,7 +45,8 @@
             android:paddingTop="@dimen/section_news_screen_paddingTop"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/section_title" />
+            app:layout_constraintTop_toBottomOf="@id/section_title"
+            tools:listitem="@layout/section_news_item" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
