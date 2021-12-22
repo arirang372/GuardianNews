@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.sung.guardiannews.R
 import com.sung.guardiannews.databinding.FragmentGuardianSectionNewsBinding
 import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
@@ -29,7 +30,8 @@ import kotlinx.coroutines.launch
  */
 @AndroidEntryPoint
 class GuardianSectionNewsFragment : Fragment(), GuardianArticleCallback {
-    private val adapter = GuardianSectionNewsItemsPagingDataAdapter(this)
+    private val adapter =
+        GuardianSectionNewsItemsPagingDataAdapter(this, R.layout.section_news_item)
     private val viewModel: GuardianSectionNewsViewModel by viewModels()
     private lateinit var binding: FragmentGuardianSectionNewsBinding
     private var section: Section? = null
