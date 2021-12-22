@@ -1,11 +1,12 @@
 package com.sung.guardiannews.model
 
-import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 //@Entity(tableName = "sections", indices = [Index(value = ["sectionName"], unique = true)])
+@Parcelize
 data class Section(
     //@PrimaryKey(autoGenerate = true)
     @SerializedName("primary_id")
@@ -17,22 +18,7 @@ data class Section(
     val apiUrl: String? = "",
     var articles: List<Article>? = mutableListOf()
 ) : Comparable<Section>, Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-    )
-
     override fun compareTo(other: Section) = 0
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
-        parcel.writeString(sectionName)
-        parcel.writeString(webTitle)
-        parcel.writeString(webUrl)
-        parcel.writeString(apiUrl)
-    }
 
     @ExperimentalStdlibApi
     fun titleCapitalize(input: String): String {
@@ -43,19 +29,5 @@ data class Section(
             newWord += "$newInput "
         }
         return newWord
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Section> {
-        override fun createFromParcel(parcel: Parcel): Section {
-            return Section(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Section?> {
-            return arrayOfNulls(size)
-        }
     }
 }

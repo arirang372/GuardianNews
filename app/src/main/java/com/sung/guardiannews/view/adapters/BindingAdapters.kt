@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
+import com.sung.guardiannews.R
 import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Field
 import com.sung.guardiannews.view.GuardianArticleCallback
@@ -24,7 +25,7 @@ object BindingAdapters {
     @BindingAdapter(value = ["articles", "callback"])
     fun setArticles(view: RecyclerView, articles: List<Article>?, callback: GuardianNewsCallback) {
         if (articles != null) {
-            view.adapter = GuardianArticleListAdapter(callback).apply {
+            view.adapter = GuardianArticleListAdapter(R.layout.news_section_article_item, callback).apply {
                 submitList(articles)
             }
         }
@@ -36,7 +37,7 @@ object BindingAdapters {
         view: RecyclerView, articles: List<Article>?, callback: GuardianArticleCallback
     ) {
         if (articles != null) {
-            view.adapter = GuardianMostViewedArticleListAdapter(callback).apply {
+            view.adapter = GuardianArticleListAdapter(R.layout.most_viewed_article_item, callback).apply {
                 submitList(articles)
             }
         }

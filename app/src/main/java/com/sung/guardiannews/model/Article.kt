@@ -1,9 +1,8 @@
 package com.sung.guardiannews.model
 
-import android.os.Build
-import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 
 //@Entity(
@@ -14,6 +13,7 @@ import com.google.gson.annotations.SerializedName
 //    )],
 //    indices = [Index(value = ["sectionId"])]
 //)
+@Parcelize
 data class Article(
     @field:SerializedName("primary_id")
     //@PrimaryKey(autoGenerate = true)
@@ -31,58 +31,6 @@ data class Article(
     val fields: Field?,
     val pillarId: String? = "",
     var mostViewed: List<Article>? = mutableListOf()
-) : Comparable<Article>, Parcelable {
-    constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readString(),
-        parcel.readByte() != 0.toByte(),
-        parcel.readParcelable<Field>(Field::class.java.classLoader),
-        parcel.readString(),
-        arrayListOf<Article>().apply {
-            parcel.readArrayList(Article::class.java.classLoader)
-        }
-    )
-
+) : Comparable<Article>, Parcelable{
     override fun compareTo(other: Article) = 0
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
-        parcel.writeString(resourceName)
-        parcel.writeString(type)
-        parcel.writeString(sectionId)
-        parcel.writeString(sectionNameChild)
-        parcel.writeString(webPublicationDate)
-        parcel.writeString(webTitle)
-        parcel.writeString(webUrl)
-        parcel.writeString(apiUrl)
-        parcel.writeByte(if (isHosted) 1 else 0)
-        parcel.writeParcelable(fields, flags)
-        parcel.writeString(pillarId)
-        if (Build.VERSION.SDK_INT >= 29) {
-            mostViewed?.let {
-                parcel.writeParcelableList(it, flags)
-            }
-        } else {
-            mostViewed?.let {
-                parcel.writeList(it as List<Article>)
-            }
-        }
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Article> {
-        override fun createFromParcel(parcel: Parcel) = Article(parcel)
-        override fun newArray(size: Int): Array<Article?> {
-            return arrayOfNulls(size)
-        }
-    }
 }
