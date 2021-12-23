@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
  *   @author John Sung
  */
 @AndroidEntryPoint
-class GuardianArticleFragment : Fragment(), GuardianArticleCallback {
+open class GuardianArticleFragment : Fragment(), GuardianArticleCallback {
     private lateinit var binding: FragmentGuardianArticleBinding
 
     override fun onCreateView(
@@ -59,3 +59,6 @@ class GuardianArticleFragment : Fragment(), GuardianArticleCallback {
         )
     }
 }
+
+@AndroidEntryPoint
+class GuardianMostViewedArticleFragment : GuardianArticleFragment() {}
