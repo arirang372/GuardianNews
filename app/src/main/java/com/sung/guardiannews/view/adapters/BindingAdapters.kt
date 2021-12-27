@@ -8,9 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import com.squareup.picasso.Picasso
 import com.sung.guardiannews.R
+import com.sung.guardiannews.databinding.MostViewedArticleCardBinding
+import com.sung.guardiannews.databinding.NewsSectionArticleItemBinding
+import com.sung.guardiannews.databinding.NewsSectionArticlesBinding
 import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Field
+import com.sung.guardiannews.model.Section
 import com.sung.guardiannews.view.GuardianArticleCallback
+import com.sung.guardiannews.view.GuardianGenericRecyclerViewAdapter
 import com.sung.guardiannews.view.GuardianNewsCallback
 
 object BindingAdapters {
@@ -21,12 +26,29 @@ object BindingAdapters {
         view.visibility = if (visible) View.VISIBLE else View.GONE
     }
 
+//    @JvmStatic
+//    @BindingAdapter(value = ["sections", "callback"])
+//    fun setSections(view: RecyclerView, sections : List<Section>?, callback: GuardianNewsCallback){
+//        val adapter = sections?.let {
+//            GuardianGenericRecyclerViewAdapter<NewsSectionArticlesBinding, Section>(
+//                R.layout.news_section_articles,
+//                it,
+//                callback
+//            )
+//        }
+//        view.adapter = adapter
+//    }
+
     @JvmStatic
     @BindingAdapter(value = ["articles", "callback"])
     fun setArticles(view: RecyclerView, articles: List<Article>?, callback: GuardianNewsCallback) {
         if (articles != null) {
-            view.adapter = GuardianArticleListAdapter(R.layout.news_section_article_item, callback).apply {
-                submitList(articles)
+//            view.adapter =
+//                GuardianArticleListAdapter(R.layout.news_section_article_item, callback).apply {
+//                    submitList(articles)
+//                }
+            GuardianGenericRecyclerViewAdapter<NewsSectionArticleItemBinding, Article>(R.layout.news_section_article_item, articles, callback).also {
+                view.adapter = it
             }
         }
     }
@@ -37,8 +59,13 @@ object BindingAdapters {
         view: RecyclerView, articles: List<Article>?, callback: GuardianArticleCallback
     ) {
         if (articles != null) {
-            view.adapter = GuardianArticleListAdapter(R.layout.most_viewed_article_item, callback).apply {
-                submitList(articles)
+//            view.adapter =
+//                GuardianArticleListAdapter(R.layout.most_viewed_article_item, callback).apply {
+//                    submitList(articles)
+//                }
+
+            GuardianGenericRecyclerViewAdapter<MostViewedArticleCardBinding, Article>(R.layout.most_viewed_article_item, articles, callback).also {
+                view.adapter = it
             }
         }
     }
