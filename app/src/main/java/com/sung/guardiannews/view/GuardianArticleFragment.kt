@@ -61,4 +61,4 @@ open class GuardianArticleFragment : Fragment(), GuardianArticleCallback {
 }
 
 @AndroidEntryPoint
-class GuardianMostViewedArticleFragment : GuardianArticleFragment() {}
+class GuardianMostViewedArticleFragment : GuardianArticleFragment()
