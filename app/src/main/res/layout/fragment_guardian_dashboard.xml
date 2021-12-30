@@ -99,17 +99,17 @@
             tools:ignore="MissingConstraints"
             tools:visibility="visible" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/dashboardBottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/white"
-            android:visibility="@{!viewModel.dataLoading}"
-            app:itemBackground="@color/white"
-            app:itemIconTint="@color/black"
-            app:itemTextColor="@color/black"
-            app:menu="@menu/dashboard_bottom_menu_items" />
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/dashboardBottomNavigationView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:background="@color/white"-->
+<!--            android:visibility="@{!viewModel.dataLoading}"-->
+<!--            app:itemBackground="@color/white"-->
+<!--            app:itemIconTint="@color/black"-->
+<!--            app:itemTextColor="@color/black"-->
+<!--            app:menu="@menu/dashboard_bottom_menu_items" />-->
 
     </RelativeLayout>
 </layout>

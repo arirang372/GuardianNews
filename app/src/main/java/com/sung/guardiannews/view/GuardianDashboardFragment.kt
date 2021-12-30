@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -34,9 +35,17 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentGuardianDashboardBinding.inflate(inflater, container, false)
-        binding.viewModel = viewModel
+        binding = FragmentGuardianDashboardBinding.inflate(inflater, container, false).apply {
+            this.viewModel = viewModel
+        }
+        setUpToolbar()
         return binding.root
+    }
+
+    private fun setUpToolbar() {
+        val appCompatActivity = activity as AppCompatActivity
+        appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        appCompatActivity.setSupportActionBar(binding.toolbar)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,10 +92,18 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
     }
 
     override fun onGuardianSectionSelected(section: Section) {
-        findNavController().navigate(GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianSectionNewsFragment(section))
+        findNavController().navigate(
+            GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianSectionNewsFragment(
+                section
+            )
+        )
     }
 
     override fun onGuardianArticleSelected(article: Article) {
-        findNavController().navigate(GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianArticleFragment(article))
+        findNavController().navigate(
+            GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianArticleFragment(
+                article
+            )
+        )
     }
 }

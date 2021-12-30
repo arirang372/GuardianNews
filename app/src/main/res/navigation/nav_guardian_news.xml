@@ -2,6 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_guardian_news_home"
     app:startDestination="@id/guardianDashboardFragment">
 
     <fragment
@@ -66,8 +67,7 @@
     </fragment>
     <fragment
         android:id="@+id/guardianMostViewedArticleFragment"
-        android:name="com.sung.guardiannews.view.GuardianMostViewedArticleFragment"
-        tools:layout="@layout/fragment_most_viewed_article">
+        android:name="com.sung.guardiannews.view.GuardianMostViewedArticleFragment">
         <argument
             android:name="article"
             android:defaultValue="@null"
