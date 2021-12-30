@@ -19,11 +19,10 @@ class GuardianDashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        DataBindingUtil.setContentView<ActivityGuardianDashboardBinding>(
-//            this,
-//            R.layout.activity_guardian_dashboard
-//        )
-        setContentView(R.layout.activity_guardian_dashboard)
+        DataBindingUtil.setContentView<ActivityGuardianDashboardBinding>(
+            this,
+            R.layout.activity_guardian_dashboard
+        )
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
