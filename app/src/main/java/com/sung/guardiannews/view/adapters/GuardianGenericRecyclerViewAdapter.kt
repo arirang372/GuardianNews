@@ -1,4 +1,4 @@
-package com.sung.guardiannews.view
+package com.sung.guardiannews.view.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.databinding.library.baseAdapters.BR
 import androidx.recyclerview.widget.RecyclerView
-import com.sung.guardiannews.model.Section
+import com.sung.guardiannews.view.GuardianArticleCallback
 
 open class GuardianGenericRecyclerViewAdapter<T : ViewDataBinding, M>(
     private val layoutResourceId: Int,
@@ -34,10 +34,6 @@ open class GuardianGenericRecyclerViewAdapter<T : ViewDataBinding, M>(
         holder.binding.executePendingBindings()
     }
 
-    fun setData(dataset: List<M>){
-        this.dataset = dataset
-        notifyDataSetChanged()
-    }
     override fun getItemCount() = dataset.size
     private fun getItemAt(position: Int) = dataset[position]
 }
