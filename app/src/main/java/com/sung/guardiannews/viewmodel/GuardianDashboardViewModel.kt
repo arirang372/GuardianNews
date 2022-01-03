@@ -46,7 +46,8 @@ class GuardianDashboardViewModel @Inject constructor(
             val elapsed = measureTimeMillis {
                 val response = repository.getSections().response
                 response.results.map { async { processResult(it, articleType) } }.awaitAll()
-                sectionResponseResult.postValue(GuardianServiceResponseResult.success(response.results))
+                val filtered = response.results.filter { !it.articles.isNullOrEmpty() }
+                sectionResponseResult.postValue(GuardianServiceResponseResult.success(filtered))
             }
             Log.v("Sections", "it took $elapsed ms")
         } catch (exception: Exception) {
