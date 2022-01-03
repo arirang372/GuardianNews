@@ -40,16 +40,12 @@ class GuardianDashboardViewModel @Inject constructor(
 //        dataLoading.set(false)
 //    }
 
-    init {
-        getSections()
-    }
-
-    private fun getSections() = viewModelScope.launch {
+    fun fetchSections(articleType: String = "") = viewModelScope.launch {
         dataLoading.set(true)
         try {
             val elapsed = measureTimeMillis {
                 val response = repository.getSections().response
-                response.results.map { async { processResult(it) } }.awaitAll()
+                response.results.map { async { processResult(it, articleType) } }.awaitAll()
                 sectionResponseResult.postValue(GuardianServiceResponseResult.success(response.results))
             }
             Log.v("Sections", "it took $elapsed ms")
@@ -62,16 +58,17 @@ class GuardianDashboardViewModel @Inject constructor(
         }
     }
 
-    private suspend fun processResult(section: Section): Section {
+    private suspend fun processResult(section: Section, articleType: String = ""): Section {
         try {
-            section.articles = section.sectionName?.let { it -> repository.getArticles(it).data }
+            section.articles = section.sectionName?.let { it -> repository.getArticles(it, articleType).data }
         } catch (exception: Exception) {
             //do nothing...
         }
         return section
     }
 
-    fun getSectionResponseResult(): LiveData<GuardianServiceResponseResult<List<Section>>> = sectionResponseResult
+    fun getSectionResponseResult(): LiveData<GuardianServiceResponseResult<List<Section>>> =
+        sectionResponseResult
 }
 
 

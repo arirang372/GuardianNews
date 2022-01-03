@@ -17,8 +17,8 @@ class GuardianNewsRepository @Inject constructor(private val service: GuardianNe
         return service.getSections()
     }
 
-    suspend fun getArticles(sectionId: String): GuardianServiceResponseResult<List<Article>> {
-        val serviceResponse = service.getArticles(sectionId)
+    suspend fun getArticles(sectionId: String, articleType : String = ""): GuardianServiceResponseResult<List<Article>> {
+        val serviceResponse = service.getArticles(sectionId, 1, 10, articleType, "all", "all", true)
         val articles: List<Article> = serviceResponse.response.results
         articles.forEach { article ->
             article.mostViewed = serviceResponse.response.mostViewed

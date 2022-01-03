@@ -24,11 +24,20 @@ import dagger.hilt.android.AndroidEntryPoint
  *   @author John Sung
  */
 @AndroidEntryPoint
-class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
-    private var sections: List<Section>? = listOf()
+open class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
+    open var sections: List<Section>? = listOf()
     private val sectionListAdapter = GuardianSectionListAdapter(this)
-    private lateinit var binding: FragmentGuardianDashboardBinding
-    private val viewModel: GuardianDashboardViewModel by viewModels()
+    open lateinit var binding: FragmentGuardianDashboardBinding
+    open val viewModel: GuardianDashboardViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        fetchSection()
+    }
+
+    open fun fetchSection() {
+        viewModel.fetchSections("article")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -102,6 +111,29 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
     override fun onGuardianArticleSelected(article: Article) {
         findNavController().navigate(
             GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianArticleFragment(
+                article
+            )
+        )
+    }
+}
+
+@AndroidEntryPoint
+class GuardianNewsLiveBlogFragment : GuardianDashboardFragment() {
+    override fun fetchSection() {
+        viewModel.fetchSections("liveblog")
+    }
+
+    override fun onGuardianSectionSelected(section: Section) {
+        findNavController().navigate(
+            GuardianNewsLiveBlogFragmentDirections.actionGuardianNewsLiveBlogFragmentToGuardianSectionNewsFragment(
+                section
+            )
+        )
+    }
+
+    override fun onGuardianArticleSelected(article: Article) {
+        findNavController().navigate(
+            GuardianNewsLiveBlogFragmentDirections.actionGuardianLiveBlogFragmentToGuardianArticleFragment(
                 article
             )
         )
