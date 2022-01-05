@@ -62,7 +62,7 @@
                     android:background="@android:color/transparent"
                     app:contentInsetStartWithNavigation="0dp"
                     app:layout_collapseMode="pin"
-                    app:menu="@menu/menu_plant_detail"
+                    app:menu="@menu/article_menu_items"
                     app:navigationIcon="@drawable/ic_back_arrow"
                     app:titleTextAppearance="@style/TextAppearance.GuardianNews.Toolbar.Title.Text"
                     app:titleTextColor="?attr/colorOnSurface" />
