@@ -41,6 +41,9 @@ class GuardianDashboardViewModel @Inject constructor(
 //    }
 
     fun fetchSections(articleType: String = "") = viewModelScope.launch {
+        if (sectionResponseResult.value?.data?.isNotEmpty() == true) {
+            return@launch
+        }
         dataLoading.set(true)
         try {
             val elapsed = measureTimeMillis {

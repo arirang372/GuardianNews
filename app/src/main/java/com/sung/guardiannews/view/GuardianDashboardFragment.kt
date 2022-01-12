@@ -30,12 +30,9 @@ open class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
     open lateinit var binding: FragmentGuardianDashboardBinding
     open val viewModel: GuardianDashboardViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fetchSection()
-    }
-
     open fun fetchSection() {
+        //TODO::figure out the better solution to handle the loading bar rather than this solution.
+        binding.loadingIndicator.visibility = View.VISIBLE
         viewModel.fetchSections("article")
     }
 
@@ -47,6 +44,7 @@ open class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
         binding = FragmentGuardianDashboardBinding.inflate(inflater, container, false).apply {
             this.viewModel = viewModel
         }
+        fetchSection()
         setUpToolbar()
         return binding.root
     }
@@ -87,6 +85,7 @@ open class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
         viewModel.getSectionResponseResult().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
+                    binding.loadingIndicator.visibility = View.GONE
                     sections = it.data
                     viewModel.dashboardTitle.set("${sections?.size} sections")
                     binding.newsSectionItemsRecyclerView.adapter = sectionListAdapter.apply {
@@ -94,6 +93,7 @@ open class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
                     }
                 }
                 Status.ERROR -> {
+                    binding.loadingIndicator.visibility = View.GONE
                     Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
                 }
             }
