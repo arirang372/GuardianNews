@@ -21,9 +21,9 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             app:itemBackground="@color/white"
-            app:itemIconTint="@color/black"
-            app:itemTextColor="@color/black"
-            app:menu="@menu/dashboard_bottom_menu_items" />
+            app:itemIconTint="@drawable/bottom_nav_selector"
+            app:itemTextColor="@drawable/bottom_nav_selector"
+            app:menu="@menu/dashboard_bottom_nav_menu_items" />
     </LinearLayout>
 </layout>
 

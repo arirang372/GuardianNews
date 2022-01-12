@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/drawable-v24/ic_detail_share.xml" value="0.2703125" />
+        <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/drawable-v24/ic_home.xml" value="0.175" />
+        <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/drawable/bottom_nav_selector.xml" value="0.175" />
         <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/drawable/ic_back_arrow.xml" value="0.2703125" />
+        <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/drawable/ic_live.xml" value="0.175" />
         <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/layout/activity_guardian_dashboard.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/layout/fragment_guardian_article.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/layout/fragment_guardian_dashboard.xml" value="0.264" />
@@ -15,6 +18,7 @@
         <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/layout/news_section_article_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/layout/news_section_articles.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/layout/section_news_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/menu/dashboard_bottom_menu_items.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/johns/Documents/Kotlin/AndroidStudioProjects/GuardianNews/app/src/main/res/menu/menu_plant_detail.xml" value="0.25416666666666665" />
       </map>
     </option>
