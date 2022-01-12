@@ -26,7 +26,7 @@ class GuardianDashboardViewModel @Inject constructor(
     private val sectionResponseResult =
         MutableLiveData<GuardianServiceResponseResult<List<Section>>>()
 
-//    val articleResponseResult: LiveData<GuardianServiceResponseResult<List<Article>>> =
+    //    val articleResponseResult: LiveData<GuardianServiceResponseResult<List<Article>>> =
 //        sectionName.switchMap { name ->
 //            dataLoading.set(true)
 //            liveData(Dispatchers.IO + exceptionHandler) {
@@ -47,13 +47,13 @@ class GuardianDashboardViewModel @Inject constructor(
                 val response = repository.getSections().response
                 response.results.map { async { processResult(it, articleType) } }.awaitAll()
                 val filtered = response.results.filter { !it.articles.isNullOrEmpty() }
-                sectionResponseResult.postValue(GuardianServiceResponseResult.success(filtered))
+                sectionResponseResult.value = GuardianServiceResponseResult.success(filtered)
             }
             Log.v("Sections", "it took $elapsed ms")
         } catch (exception: Exception) {
-            sectionResponseResult.postValue(
+            sectionResponseResult.value =
                 GuardianServiceResponseResult.error(exception.toString(), null)
-            )
+
         } finally {
             dataLoading.set(false)
         }
@@ -61,7 +61,8 @@ class GuardianDashboardViewModel @Inject constructor(
 
     private suspend fun processResult(section: Section, articleType: String = ""): Section {
         try {
-            section.articles = section.sectionName?.let { it -> repository.getArticles(it, articleType).data }
+            section.articles =
+                section.sectionName?.let { it -> repository.getArticles(it, articleType).data }
         } catch (exception: Exception) {
             //do nothing...
         }
