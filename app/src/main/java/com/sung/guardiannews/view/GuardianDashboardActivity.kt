@@ -39,7 +39,8 @@ class GuardianDashboardActivity : AppCompatActivity() {
     private fun setupBottomNavigationBar() {
         val bottomNavigationView =
             findViewById<BottomNavigationView>(R.id.dashboardBottomNavigationView)
-        val navGraphIds = listOf(R.navigation.nav_guardian_news, R.navigation.nav_guardian_news_live)
+        val navGraphIds =
+            listOf(R.navigation.nav_guardian_news, R.navigation.nav_guardian_news_live)
 
         val controller: LiveData<NavController> = bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
@@ -47,9 +48,9 @@ class GuardianDashboardActivity : AppCompatActivity() {
             containerId = R.id.nav_host,
             intent = intent
         )
-        controller.observe(this, { navController ->
+        controller.observe(this) { navController ->
             setupActionBarWithNavController(navController)
-        })
+        }
         currentNavController = controller
     }
 

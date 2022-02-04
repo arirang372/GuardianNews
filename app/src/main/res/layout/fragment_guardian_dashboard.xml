@@ -57,10 +57,10 @@
                         android:id="@+id/toolbar"
                         android:layout_width="match_parent"
                         android:layout_height="?attr/actionBarSize"
-                        android:background="@android:color/transparent"
                         app:contentInsetStartWithNavigation="0dp"
                         app:layout_collapseMode="pin"
                         app:menu="@menu/dashboard_top_menu_items"
+                        app:popupTheme="@style/GuardianNews.LightToolbarStyle"
                         app:title="@string/app_name"
                         app:titleTextColor="?attr/colorOnSurface" />
 

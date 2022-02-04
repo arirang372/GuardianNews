@@ -1,15 +1,17 @@
 package com.sung.guardiannews.view
 
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.sung.guardiannews.R
 import com.sung.guardiannews.data.remote.Status
 import com.sung.guardiannews.databinding.FragmentGuardianDashboardBinding
 import com.sung.guardiannews.model.Article
@@ -36,6 +38,11 @@ open class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
         viewModel.fetchSections("article")
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,11 +56,56 @@ open class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.dashboard_top_menu_items, menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        when (AppCompatDelegate.getDefaultNightMode()) {
+            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM ->
+                menu?.findItem(R.id.menu_night_mode_system)?.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_AUTO ->
+                menu?.findItem(R.id.menu_night_mode_auto)?.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_YES ->
+                menu?.findItem(R.id.menu_night_mode_night)?.isChecked = true
+            AppCompatDelegate.MODE_NIGHT_NO ->
+                menu?.findItem(R.id.menu_night_mode_day)?.isChecked = true
+        }
+        super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_night_mode_system -> setNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            R.id.menu_night_mode_day -> setNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            R.id.menu_night_mode_night -> setNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            R.id.menu_night_mode_auto -> setNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setNightMode(@AppCompatDelegate.NightMode nightMode: Int) {
+        AppCompatDelegate.setDefaultNightMode(nightMode)
+        if (Build.VERSION.SDK_INT >= 11) {
+            requireActivity().recreate()
+        }
+    }
+
     private fun setUpToolbar() {
         val appCompatActivity = activity as AppCompatActivity
         appCompatActivity.supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        //TODO::try to figure out the better way to change the overflow menu color
+        var drawable = binding.toolbar.overflowIcon
+        if (drawable != null) {
+            drawable = DrawableCompat.wrap(drawable)
+            DrawableCompat.setTint(drawable.mutate(), resources.getColor(getOverflowMenuColor()))
+            binding.toolbar.overflowIcon = drawable
+        }
         appCompatActivity.setSupportActionBar(binding.toolbar)
     }
+
+    private fun getOverflowMenuColor() =
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) R.color.white else R.color.black
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,7 +134,7 @@ open class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
     }
 
     private fun searchSections() {
-        viewModel.getSectionResponseResult().observe(viewLifecycleOwner, {
+        viewModel.getSectionResponseResult().observe(viewLifecycleOwner) {
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.loadingIndicator.visibility = View.GONE
@@ -97,7 +149,7 @@ open class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
                     Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
                 }
             }
-        })
+        }
     }
 
     override fun onGuardianSectionSelected(section: Section) {
