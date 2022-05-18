@@ -10,7 +10,9 @@ import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class GuardianNewsRepository @Inject constructor(private val service: GuardianNewsService) {
 
     suspend fun getSections(): GuardianServiceResponse<Section> {

@@ -1,4 +1,4 @@
-package com.sung.guardiannews.view
+package com.sung.guardiannews.view.liveblog
 
 import android.os.Build
 import android.os.Bundle
@@ -13,29 +13,30 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.sung.guardiannews.R
 import com.sung.guardiannews.data.remote.Status
-import com.sung.guardiannews.databinding.FragmentGuardianDashboardBinding
+import com.sung.guardiannews.databinding.FragmentGuardianLiveblogDashboardBinding
 import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
+import com.sung.guardiannews.view.GuardianNewsCallback
 import com.sung.guardiannews.view.adapters.GuardianSectionListAdapter
-import com.sung.guardiannews.viewmodel.GuardianDashboardViewModel
+import com.sung.guardiannews.viewmodel.GuardianNewsLiveBlogViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
- *   This is a main dashboard fragment
+ *   This is a liveblog dashboard fragment
  *
  *   @author John Sung
  */
 @AndroidEntryPoint
-class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
-    private val viewModel: GuardianDashboardViewModel by viewModels()
+class GuardianNewsLiveBlogFragment : Fragment(), GuardianNewsCallback {
+    private val viewModel: GuardianNewsLiveBlogViewModel by viewModels()
     var sections: List<Section>? = listOf()
     private val sectionListAdapter = GuardianSectionListAdapter(this)
-    private lateinit var binding: FragmentGuardianDashboardBinding
+    private lateinit var binding: FragmentGuardianLiveblogDashboardBinding
 
     private fun fetchSection() {
         //TODO::figure out the better solution to handle the loading bar rather than this solution.
         binding.loadingIndicator.visibility = View.VISIBLE
-        viewModel.fetchSections("article")
+        viewModel.fetchSections("liveblog")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,9 +49,10 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentGuardianDashboardBinding.inflate(inflater, container, false).apply {
-            this.viewModel = viewModel
-        }
+        binding =
+            FragmentGuardianLiveblogDashboardBinding.inflate(inflater, container, false).apply {
+                this.viewModel = viewModel
+            }
         fetchSection()
         setUpToolbar()
         return binding.root
@@ -154,7 +156,7 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
 
     override fun onGuardianSectionSelected(section: Section) {
         findNavController().navigate(
-            GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianSectionNewsFragment(
+            GuardianNewsLiveBlogFragmentDirections.actionGuardianNewsLiveBlogFragmentToGuardianSectionNewsFragment(
                 section
             )
         )
@@ -162,7 +164,7 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
 
     override fun onGuardianArticleSelected(article: Article) {
         findNavController().navigate(
-            GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianArticleFragment(
+            GuardianNewsLiveBlogFragmentDirections.actionGuardianLiveBlogFragmentToGuardianArticleFragment(
                 article
             )
         )
