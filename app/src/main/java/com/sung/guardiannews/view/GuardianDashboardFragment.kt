@@ -28,7 +28,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
     private val viewModel: GuardianDashboardViewModel by viewModels()
-    var sections: List<Section>? = listOf()
     private val sectionListAdapter = GuardianSectionListAdapter(this)
     private lateinit var binding: FragmentGuardianDashboardBinding
 
@@ -138,7 +137,7 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.loadingIndicator.visibility = View.GONE
-                    sections = it.data
+                    val sections : List<Section>? = it.data
                     viewModel.dashboardTitle.set("${sections?.size} sections")
                     binding.newsSectionItemsRecyclerView.adapter = sectionListAdapter.apply {
                         submitList(sections)
