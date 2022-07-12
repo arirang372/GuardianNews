@@ -1,8 +1,7 @@
-package com.sung.guardiannews.data
+package com.sung.guardiannews.data.remote
 
 import android.util.Log
 import com.sung.guardiannews.BuildConfig
-import com.sung.guardiannews.data.remote.GuardianServiceResponse
 import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
 import okhttp3.OkHttpClient
@@ -12,7 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-
 
 interface GuardianNewsService {
 
