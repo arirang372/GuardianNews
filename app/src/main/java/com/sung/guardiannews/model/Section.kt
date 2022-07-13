@@ -1,14 +1,17 @@
 package com.sung.guardiannews.model
 
 import android.os.Parcelable
-import androidx.room.ColumnInfo
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
+import com.sung.guardiannews.data.local.ArticleTypeConverters
 import kotlinx.android.parcel.Parcelize
 
-//@Entity(tableName = "sections", indices = [Index(value = ["sectionName"], unique = true)])
+
+@Entity(tableName = "sections", indices = [Index(value = ["sectionName"], unique = true)])
+@TypeConverters(ArticleTypeConverters::class)
 @Parcelize
 data class Section(
-    //@PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("primary_id")
     @ColumnInfo(name = "primary_id")
     val id: Int,
