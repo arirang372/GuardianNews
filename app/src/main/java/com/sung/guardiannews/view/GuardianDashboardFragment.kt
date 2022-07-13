@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.*
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
@@ -46,7 +46,7 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentGuardianDashboardBinding.inflate(inflater, container, false).apply {
             this.viewModel = viewModel
         }
@@ -60,31 +60,31 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
-        when (AppCompatDelegate.getDefaultNightMode()) {
-            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM ->
-                menu?.findItem(R.id.menu_night_mode_system)?.isChecked = true
-            AppCompatDelegate.MODE_NIGHT_AUTO ->
-                menu?.findItem(R.id.menu_night_mode_auto)?.isChecked = true
-            AppCompatDelegate.MODE_NIGHT_YES ->
-                menu?.findItem(R.id.menu_night_mode_night)?.isChecked = true
-            AppCompatDelegate.MODE_NIGHT_NO ->
-                menu?.findItem(R.id.menu_night_mode_day)?.isChecked = true
+        when (getDefaultNightMode()) {
+            MODE_NIGHT_FOLLOW_SYSTEM ->
+                menu.findItem(R.id.menu_night_mode_system)?.isChecked = true
+            MODE_NIGHT_AUTO ->
+                menu.findItem(R.id.menu_night_mode_auto)?.isChecked = true
+            MODE_NIGHT_YES ->
+                menu.findItem(R.id.menu_night_mode_night)?.isChecked = true
+            MODE_NIGHT_NO ->
+                menu.findItem(R.id.menu_night_mode_day)?.isChecked = true
         }
         super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_night_mode_system -> setNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            R.id.menu_night_mode_day -> setNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            R.id.menu_night_mode_night -> setNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            R.id.menu_night_mode_auto -> setNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
+            R.id.menu_night_mode_system -> setNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
+            R.id.menu_night_mode_day -> setNightMode(MODE_NIGHT_NO)
+            R.id.menu_night_mode_night -> setNightMode(MODE_NIGHT_YES)
+            R.id.menu_night_mode_auto -> setNightMode(MODE_NIGHT_AUTO_BATTERY)
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setNightMode(@AppCompatDelegate.NightMode nightMode: Int) {
-        AppCompatDelegate.setDefaultNightMode(nightMode)
+    private fun setNightMode(@NightMode nightMode: Int) {
+        setDefaultNightMode(nightMode)
         if (Build.VERSION.SDK_INT >= 11) {
             requireActivity().recreate()
         }
@@ -104,7 +104,7 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
     }
 
     private fun getOverflowMenuColor() =
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) R.color.white else R.color.black
+        if (getDefaultNightMode() == MODE_NIGHT_YES) R.color.white else R.color.black
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -137,7 +137,7 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
             when (it.status) {
                 Status.SUCCESS -> {
                     binding.loadingIndicator.visibility = View.GONE
-                    val sections : List<Section>? = it.data
+                    val sections: List<Section>? = it.data
                     viewModel.dashboardTitle.set("${sections?.size} sections")
                     binding.newsSectionItemsRecyclerView.adapter = sectionListAdapter.apply {
                         submitList(sections)
