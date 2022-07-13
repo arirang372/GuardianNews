@@ -23,22 +23,13 @@ class GuardianNewsRepository @Inject constructor(
         return apiHelper.getSections()
     }
 
-    suspend fun getArticles(
-        sectionId: String,
-        articleType: String = ""
-    ): Flow<List<Article>> {
-        val articles = apiHelper.getArticles(sectionId, articleType).map {
-            it.response.results.forEach { article ->
-                article.mostViewed = it.response.mostViewed
-            }
-        }.toList()
-//        val articles: List<Article> = serviceResponse.response.results
-//        articles.forEach { article ->
-//            article.mostViewed = serviceResponse.response.mostViewed
-//        }
-        return flow {
-            GuardianServiceResponseResult.success(articles)
+    suspend fun getArticles(sectionId: String, articleType : String = ""): GuardianServiceResponseResult<List<Article>> {
+        val serviceResponse = service.getArticles(sectionId, 1, 10, articleType, "all", "all", true)
+        val articles: List<Article> = serviceResponse.response.results
+        articles.forEach { article ->
+            article.mostViewed = serviceResponse.response.mostViewed
         }
+        return GuardianServiceResponseResult.success(articles)
     }
 
     fun getSectionNewsArticle(

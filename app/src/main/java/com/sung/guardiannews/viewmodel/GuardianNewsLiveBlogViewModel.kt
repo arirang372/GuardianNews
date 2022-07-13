@@ -9,33 +9,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sung.guardiannews.data.GuardianNewsRepository
 import com.sung.guardiannews.data.remote.GuardianServiceResponseResult
-import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import kotlin.system.measureTimeMillis
 
 
 @HiltViewModel
 class GuardianNewsLiveBlogViewModel @Inject constructor(
-    private val repository : GuardianNewsRepository
-) : ViewModel(){
+    private val repository: GuardianNewsRepository
+) : ViewModel() {
 
     val dataLoading = ObservableBoolean(false)
     val dashboardTitle = ObservableField<String>()
     private val sectionResponseResult =
         MutableLiveData<GuardianServiceResponseResult<List<Section>>>()
-
-    suspend fun fetchArticle(section:Section, articleType: String = "") : Flow<List<Article>> = flow{
-        section.sectionName?.let { repository.getArticles(it, articleType)}?.map {
-            section.articles = it
-        }
-    }
 
     fun fetchSections(articleType: String = "") = viewModelScope.launch {
         if (sectionResponseResult.value?.data?.isNotEmpty() == true) {
@@ -46,15 +39,14 @@ class GuardianNewsLiveBlogViewModel @Inject constructor(
             val elapsed = measureTimeMillis {
                 repository.getSections()
                     .flowOn(Dispatchers.Default)
-                    .collect {
-                            sections-> sections.forEach {
-                            fetchArticle(it, articleType)
-                             }
-                        sectionResponseResult.value = GuardianServiceResponseResult.success(sections)
+                    .catch { e ->
+                        sectionResponseResult.value =
+                            GuardianServiceResponseResult.error(e.toString(), null)
                     }
-//                response.results.map { async { processResult(it, articleType) } }.awaitAll()
-//                val filtered = response.results.filter { !it.articles.isNullOrEmpty() }
-                //sectionResponseResult.value = GuardianServiceResponseResult.success(filtered)
+                    .map { processGettingArticles(it, articleType) }
+                    .collect {
+                        sectionResponseResult.value = GuardianServiceResponseResult.success(it)
+                    }
             }
             Log.v("Sections", "it took $elapsed ms")
         } catch (exception: Exception) {
@@ -66,15 +58,23 @@ class GuardianNewsLiveBlogViewModel @Inject constructor(
         }
     }
 
-//    private suspend fun processResult(section: Section, articleType: String = ""): Section {
-//        try {
-//            section.articles =
-//                section.sectionName?.let { it -> repository.getArticles(it, articleType).data }
-//        } catch (exception: Exception) {
-//            //do nothing...
-//        }
-//        return section
-//    }
+    private suspend fun processGettingArticles(
+        sections: List<Section>,
+        articleType: String
+    ): List<Section> = withContext(Dispatchers.Default) {
+        sections.map { async { getArticlesWith(it, articleType) } }.awaitAll()
+        sections.filter { !it.articles.isNullOrEmpty() }
+    }
+
+    private suspend fun getArticlesWith(section: Section, articleType: String = ""): Section {
+        try {
+            section.articles =
+                section.sectionName?.let { it -> repository.getArticles(it, articleType).data }
+        } catch (exception: Exception) {
+            //do nothing...
+        }
+        return section
+    }
 
     fun getSectionResponseResult(): LiveData<GuardianServiceResponseResult<List<Section>>> =
         sectionResponseResult
