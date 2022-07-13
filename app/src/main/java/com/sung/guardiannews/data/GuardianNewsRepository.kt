@@ -1,48 +1,26 @@
 package com.sung.guardiannews.data
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import com.sung.guardiannews.data.remote.*
-import com.sung.guardiannews.model.Article
+import com.sung.guardiannews.data.remote.GuardianNewsApiContract
 import com.sung.guardiannews.model.Section
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class GuardianNewsRepository @Inject constructor(
-    private val apiHelper: GuardianNewsApiContract,
-    private val service: GuardianNewsService
+    private val apiHelper: GuardianNewsApiContract
 ) {
 
-    fun getSections(): Flow<List<Section>> {
-        return apiHelper.getSections()
-    }
+    fun getSections() = apiHelper.getSections()
 
-    suspend fun getArticles(sectionId: String, articleType : String = ""): GuardianServiceResponseResult<List<Article>> {
-        val serviceResponse = service.getArticles(sectionId, 1, 10, articleType, "all", "all", true)
-        val articles: List<Article> = serviceResponse.response.results
-        articles.forEach { article ->
-            article.mostViewed = serviceResponse.response.mostViewed
-        }
-        return GuardianServiceResponseResult.success(articles)
-    }
+    suspend fun getArticles(
+        sectionId: String,
+        articleType: String = ""
+    ) = apiHelper.getArticles(sectionId, articleType)
 
     fun getSectionNewsArticle(
         section: Section,
         pageType: String
-    ): Flow<PagingData<Article>> {
-        return Pager(
-            config = PagingConfig(enablePlaceholders = false, pageSize = DEFAULT_PAGE_SIZE),
-            pagingSourceFactory = {
-                GuardianNewsPagingSource(service, section, pageType)
-            }
-        ).flow
-    }
+    ) = apiHelper.getSectionNewsArticle(section, pageType)
 
     companion object {
         const val DEFAULT_PAGE_SIZE = 5
