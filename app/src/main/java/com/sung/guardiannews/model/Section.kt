@@ -19,7 +19,8 @@ data class Section(
     val webTitle: String? = "",
     val webUrl: String? = "",
     val apiUrl: String? = "",
-    var articles: List<Article>? = mutableListOf()
+    var articles: List<Article>? = mutableListOf(),
+    var articleType : String? = ""
 ) : Comparable<Section>, Parcelable {
     override fun compareTo(other: Section) = 0
 

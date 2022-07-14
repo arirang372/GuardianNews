@@ -66,6 +66,7 @@ class GuardianDashboardViewModel @Inject constructor(
 
     private suspend fun getArticlesWith(section: Section, articleType: String = ""): Section {
         try {
+            section.articleType = articleType
             section.articles =
                 section.sectionName?.let { it -> repository.getArticles(it, articleType).data }
         } catch (exception: Exception) {

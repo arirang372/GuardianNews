@@ -4,8 +4,8 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.sung.guardiannews.model.Article
 import com.sung.guardiannews.model.Section
-
 
 @Dao
 interface SectionDao {
@@ -14,4 +14,7 @@ interface SectionDao {
 
     @Query("SELECT * FROM sections")
     suspend fun getAllSections(): List<Section>
+
+    @Query("SELECT * FROM sections WHERE sectionName = :sectionName AND articleType = :articleType")
+    suspend fun getSectionsBy(sectionName: String, articleType: String): List<Article>
 }

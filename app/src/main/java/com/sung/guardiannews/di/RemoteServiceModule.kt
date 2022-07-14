@@ -1,6 +1,5 @@
 package com.sung.guardiannews.di
 
-import com.sung.guardiannews.data.remote.GuardianNewsApiContract
 import com.sung.guardiannews.data.remote.GuardianNewsApiHelper
 import com.sung.guardiannews.data.remote.GuardianNewsService
 import dagger.Module
@@ -21,7 +20,6 @@ class RemoteServiceModule {
 
     @Singleton
     @Provides
-    fun providesGuardianNewsApiContract(service: GuardianNewsService): GuardianNewsApiContract {
-        return GuardianNewsApiHelper(service)
-    }
+    fun providesGuardianNewsApiContract(service: GuardianNewsService) =
+        GuardianNewsApiHelper(service)
 }
