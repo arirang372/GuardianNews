@@ -23,8 +23,10 @@ import kotlin.system.measureTimeMillis
 class GuardianDashboardViewModel @Inject constructor(
     private val repository: GuardianNewsRepository
 ) : ViewModel() {
-    val dataLoading = ObservableBoolean(false)
+
     val dashboardTitle = ObservableField<String>()
+    val dataLoading = ObservableBoolean(false)
+
     private val sectionResponseResult =
         MutableLiveData<GuardianServiceResponseResult<List<Section>>>()
 
@@ -69,6 +71,7 @@ class GuardianDashboardViewModel @Inject constructor(
             section.articleType = articleType
             section.articles =
                 section.sectionName?.let { it -> repository.getArticles(it, articleType).data }
+            repository.updateSection(section)
         } catch (exception: Exception) {
             //do nothing...
         }

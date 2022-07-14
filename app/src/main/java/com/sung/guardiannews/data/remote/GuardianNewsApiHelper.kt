@@ -9,9 +9,12 @@ import com.sung.guardiannews.model.Section
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
-class GuardianNewsApiHelper(private val service: GuardianNewsService) :
+@Singleton
+class GuardianNewsApiHelper @Inject constructor(private val service: GuardianNewsService) :
     GuardianNewsApiContract {
 
     override fun getSections(): Flow<List<Section>> = flow {

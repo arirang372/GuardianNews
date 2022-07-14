@@ -6,6 +6,7 @@ import com.sung.guardiannews.model.Section
 import kotlinx.coroutines.flow.Flow
 
 interface GuardianNewsApiContract {
+
     fun getSections(): Flow<List<Section>>
 
     suspend fun getArticles(
@@ -17,4 +18,5 @@ interface GuardianNewsApiContract {
         section: Section,
         pageType: String
     ): Flow<PagingData<Article>>
+
 }
