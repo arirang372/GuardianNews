@@ -66,10 +66,13 @@ class GuardianNewsLiveBlogFragment : Fragment(), GuardianNewsCallback {
         when (AppCompatDelegate.getDefaultNightMode()) {
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM ->
                 menu?.findItem(R.id.menu_night_mode_system)?.isChecked = true
+
             AppCompatDelegate.MODE_NIGHT_AUTO ->
                 menu?.findItem(R.id.menu_night_mode_auto)?.isChecked = true
+
             AppCompatDelegate.MODE_NIGHT_YES ->
                 menu?.findItem(R.id.menu_night_mode_night)?.isChecked = true
+
             AppCompatDelegate.MODE_NIGHT_NO ->
                 menu?.findItem(R.id.menu_night_mode_day)?.isChecked = true
         }
@@ -146,6 +149,7 @@ class GuardianNewsLiveBlogFragment : Fragment(), GuardianNewsCallback {
                         submitList(sections)
                     }
                 }
+
                 Status.ERROR -> {
                     binding.loadingIndicator.visibility = View.GONE
                     Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
@@ -156,17 +160,16 @@ class GuardianNewsLiveBlogFragment : Fragment(), GuardianNewsCallback {
 
     override fun onGuardianSectionSelected(section: Section) {
         findNavController().navigate(
-            GuardianNewsLiveBlogFragmentDirections.actionGuardianNewsLiveBlogFragmentToGuardianSectionNewsFragment(
-                section
-            )
+            GuardianNewsLiveBlogFragmentDirections
+                .actionGuardianNewsLiveBlogFragmentToGuardianSectionNewsFragment()
+                .setSection(section)
         )
     }
 
     override fun onGuardianArticleSelected(article: Article) {
         findNavController().navigate(
-            GuardianNewsLiveBlogFragmentDirections.actionGuardianLiveBlogFragmentToGuardianArticleFragment(
-                article
-            )
+            GuardianNewsLiveBlogFragmentDirections.actionGuardianLiveBlogFragmentToGuardianArticleFragment()
+                .setArticle(article)
         )
     }
 }

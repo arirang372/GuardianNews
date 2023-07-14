@@ -88,9 +88,8 @@ class GuardianSectionNewsFragment : Fragment(), GuardianArticleCallback {
 
     override fun onGuardianArticleSelected(article: Article) {
         findNavController().navigate(
-            GuardianSectionNewsFragmentDirections.actionGuardianSectionNewsFragmentToGuardianArticleFragment(
-                article
-            )
+            GuardianSectionNewsFragmentDirections.actionGuardianSectionNewsFragmentToGuardianArticleFragment()
+                .setArticle(article)
         )
     }
 }

@@ -64,10 +64,13 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
         when (AppCompatDelegate.getDefaultNightMode()) {
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM ->
                 menu?.findItem(R.id.menu_night_mode_system)?.isChecked = true
+
             AppCompatDelegate.MODE_NIGHT_AUTO ->
                 menu?.findItem(R.id.menu_night_mode_auto)?.isChecked = true
+
             AppCompatDelegate.MODE_NIGHT_YES ->
                 menu?.findItem(R.id.menu_night_mode_night)?.isChecked = true
+
             AppCompatDelegate.MODE_NIGHT_NO ->
                 menu?.findItem(R.id.menu_night_mode_day)?.isChecked = true
         }
@@ -144,6 +147,7 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
                         submitList(sections)
                     }
                 }
+
                 Status.ERROR -> {
                     binding.loadingIndicator.visibility = View.GONE
                     Toast.makeText(activity, it.message, Toast.LENGTH_LONG).show()
@@ -154,17 +158,15 @@ class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
 
     override fun onGuardianSectionSelected(section: Section) {
         findNavController().navigate(
-            GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianSectionNewsFragment(
-                section
-            )
+            GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianSectionNewsFragment()
+                .setSection(section)
         )
     }
 
     override fun onGuardianArticleSelected(article: Article) {
         findNavController().navigate(
-            GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianArticleFragment(
-                article
-            )
+            GuardianDashboardFragmentDirections.actionGuardianDashboardFragmentToGuardianArticleFragment()
+                .setArticle(article)
         )
     }
 }

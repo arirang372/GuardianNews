@@ -53,9 +53,8 @@ open class GuardianArticleFragment : Fragment(), GuardianArticleCallback {
 
     override fun onGuardianArticleSelected(article: Article) {
         findNavController().navigate(
-            GuardianArticleFragmentDirections.actionGuardianArticleFragmentToGuardianMostViewedArticleFragment(
-                article
-            )
+            GuardianArticleFragmentDirections.actionGuardianArticleFragmentToGuardianMostViewedArticleFragment()
+                .setArticle(article)
         )
     }
 }
