@@ -65,7 +65,7 @@ class GuardianDashboardViewModel @Inject constructor(
     private suspend fun processResult(section: Section, articleType: String = ""): Section {
         try {
             section.articles =
-                section.sectionName?.let { it -> repository.getArticles(it, articleType).data }
+                section.sectionName?.let { repository.getArticles(it, articleType).data }
         } catch (exception: Exception) {
             //do nothing...
         }
