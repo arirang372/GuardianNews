@@ -28,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class GuardianDashboardFragment : Fragment(), GuardianNewsCallback {
     private val viewModel: GuardianDashboardViewModel by viewModels()
-    var sections: List<Section>? = listOf()
+    private var sections: List<Section>? = listOf()
     private val sectionListAdapter = GuardianSectionListAdapter(this)
     private lateinit var binding: FragmentGuardianDashboardBinding
 

@@ -20,7 +20,7 @@ buildscript {
         hiltVersion = '2.44.2'
         ktlintVersion = '0.38.1'
         ktxVersion = '1.10.1'
-        lifecycleVersion = '2.2.0'
+        lifecycleVersion = '2.6.1'
         materialVersion = '1.9.0'
         mockitoVersion = '4.6.1'
         navigationVersion = '2.6.0'
